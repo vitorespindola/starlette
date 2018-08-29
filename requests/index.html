@@ -370,6 +370,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../staticfiles/" title="Static Files" class="md-nav__link">
+      Static Files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../applications/" title="Applications" class="md-nav__link">
       Applications
     </a>
@@ -489,7 +501,11 @@
 the incoming request, rather than accessing the ASGI scope and receive channel directly.</p>
 <h3 id="request">Request</h3>
 <p>Signature: <code>Request(scope, receive=None)</code></p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.request</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">Response</span>
+
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
 
@@ -524,7 +540,11 @@ components that can be parsed out of the URL.</p>
 <p>The request body as bytes: <code>await request.body()</code></p>
 <p>The request body, parsed as JSON: <code>await request.json()</code></p>
 <p>You can also access the request body as a stream, using the <code>async for</code> syntax:</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.request</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">Response</span>
+
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
 
