@@ -291,6 +291,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../exceptions/" title="Exceptions" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../staticfiles/" title="Static Files" class="md-nav__link">
       Static Files
     </a>
@@ -381,6 +393,11 @@
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">DebugMiddleware</span><span class="p">(</span><span class="n">App</span><span class="p">)</span>
 </pre></div>
+
+
+<p>For a mode complete handling of exception cases you may wish to use Starlette's
+<a href="../exceptions"><code>ExceptionMiddleware</code></a> class instead, which also includes
+optional debug handling.</p>
                 
                   
                 

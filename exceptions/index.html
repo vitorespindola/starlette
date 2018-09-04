@@ -38,7 +38,7 @@
     
     
       
-        <title>Views - Starlette</title>
+        <title>Exceptions - Starlette</title>
       
     
     
@@ -92,6 +92,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="../#exceptionmiddleware" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -114,7 +118,7 @@
                 Starlette
               </span>
               <span class="md-header-nav__topic">
-                Views
+                Exceptions
               </span>
             
           
@@ -289,11 +293,52 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../exceptions/" title="Exceptions" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Exceptions
+      </label>
+    
+    <a href="./" title="Exceptions" class="md-nav__link md-nav__link--active">
       Exceptions
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exceptionmiddleware" title="ExceptionMiddleware" class="md-nav__link">
+    ExceptionMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httpexception" title="HTTPException" class="md-nav__link">
+    HTTPException
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -349,18 +394,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Views" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../views/" title="Views" class="md-nav__link">
       Views
     </a>
-    
   </li>
 
     
@@ -371,54 +409,132 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exceptionmiddleware" title="ExceptionMiddleware" class="md-nav__link">
+    ExceptionMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httpexception" title="HTTPException" class="md-nav__link">
+    HTTPException
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Views</h1>
+                  <h1>Exceptions</h1>
                 
-                <p>Starlette includes a <code>View</code> class that provides a class-based view pattern which
-handles HTTP method dispatching.</p>
-<p>The <code>View</code> class can be used as an other ASGI application:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
-<span class="kn">from</span> <span class="nn">starlette.views</span> <span class="kn">import</span> <span class="n">View</span>
+                <p>Starlette includes an exception handling middleware that you can use in order
+to dispatch different classes of exceptions to different handlers.</p>
+<p>To see how this works, we'll start by with this small ASGI application:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.exceptions</span> <span class="kn">import</span> <span class="n">ExceptionMiddleware</span><span class="p">,</span> <span class="n">HTTPException</span>
 
 
-<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">ExceptionMiddleware</span><span class="p">(</span><span class="n">App</span><span class="p">)</span>
 </pre></div>
 
 
-<p>If you're using a Starlette application instance to handle routing, you can
-dispatch to a View class by using the <code>@app.route()</code> decorator, or the
-<code>app.add_route()</code> function. Make sure to dispatch to the class itself, rather
-than to an instance of the class:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.app</span> <span class="kn">import</span> <span class="n">App</span>
-<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
-<span class="kn">from</span> <span class="nn">starlette.views</span> <span class="kn">import</span> <span class="n">View</span>
+<p>If you run the app and make an HTTP request to it, you'll get a plain text
+response with a "403 Permission Denied" response. This is the behaviour that the
+default handler responds with when an <code>HTTPException</code> class or subclass is raised.</p>
+<p>Let's change the exception handling, so that we get JSON error responses
+instead:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.exceptions</span> <span class="kn">import</span> <span class="n">ExceptionMiddleware</span><span class="p">,</span> <span class="n">HTTPException</span>
+<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">Homepage</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="n">exc</span><span class="o">.</span><span class="n">detail</span><span class="p">},</span> <span class="n">status_code</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/{username}&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, {username}&quot;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">ExceptionMiddleware</span><span class="p">(</span><span class="n">App</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_exception_handler</span><span class="p">(</span><span class="n">HTTPException</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
 </pre></div>
 
 
-<p>Class-based views will respond with "405 Method not allowed" responses for any
-request methods which do not map to a corresponding handler.</p>
+<p>Now if we make a request to the application, we'll get back a JSON encoded
+HTTP response.</p>
+<p>By default two types of exceptions are caught and dealt with:</p>
+<ul>
+<li><code>HTTPException</code> - Used to raise standard HTTP error codes.</li>
+<li><code>Exception</code> - Used as a catch-all handler to deal with any <code>500 Internal
+Server Error</code> responses. The <code>Exception</code> case also wraps any other exception
+handling.</li>
+</ul>
+<p>The catch-all <code>Exception</code> case is used to return simple <code>500 Internal Server Error</code>
+responses. During development you might want to switch the behaviour so that
+it displays an error traceback in the browser:</p>
+<div class="codehilite"><pre><span></span>app = ExceptionMiddleware(App, debug=True)
+</pre></div>
+
+
+<p>This uses the same error tracebacks as the more minimal <a href="../debugging"><code>DebugMiddleware</code></a>.</p>
+<p>The exception handler currently only catches and deals with exceptions within
+HTTP requests. Any websocket exceptions will simply be raised to the server
+and result in an error log.</p>
+<h2 id="exceptionmiddleware">ExceptionMiddleware</h2>
+<p>The exception middleware catches and handles the exceptions, returning
+appropriate HTTP responses.</p>
+<ul>
+<li><code>ExceptionMiddleware(app, debug=False)</code> - Instantiate the exception handler,
+wrapping up it around an inner ASGI application.</li>
+</ul>
+<p>Adding handlers:</p>
+<ul>
+<li><code>.add_exception_handler(exc_class, handler)</code> - Set a handler function to run
+for the given exception class.</li>
+</ul>
+<p>Enabling debug mode:</p>
+<ul>
+<li><code>.debug</code> - If set to <code>True</code>, then the catch-all handler for <code>Exception</code> will
+not be used, and error tracebacks will be sent as responses instead.</li>
+</ul>
+<h2 id="httpexception">HTTPException</h2>
+<p>The <code>HTTPException</code> class provides a base class that you can use for any
+standard HTTP error conditions. The <code>ExceptionMiddleware</code> implementation
+defaults to returning plain-text HTTP responses for any <code>HTTPException</code>.</p>
+<ul>
+<li><code>HTTPException(status_code, detail=None)</code></li>
+</ul>
                 
                   
                 
@@ -439,7 +555,7 @@ request methods which do not map to a corresponding handler.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../debugging/" title="Debugging" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../routing/" title="Routing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -448,11 +564,25 @@ request methods which do not map to a corresponding handler.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Debugging
+                Routing
               </span>
             </div>
           </a>
         
+        
+          <a href="../staticfiles/" title="Static Files" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Static Files
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
