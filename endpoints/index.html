@@ -396,8 +396,8 @@ handles HTTP method dispatching.</p>
 dispatch to an <code>HTTPEndpoint</code> class by using the <code>@app.route()</code> decorator, or the
 <code>app.add_route()</code> function. Make sure to dispatch to the class itself, rather
 than to an instance of the class:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.app</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
 <span class="kn">from</span> <span class="nn">starlette.endpoints</span> <span class="kn">import</span> <span class="n">HTTPEndpoint</span>
 
 
