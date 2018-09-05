@@ -38,7 +38,7 @@
     
     
       
-        <title>Debugging - Starlette</title>
+        <title>Debug - Starlette</title>
       
     
     
@@ -114,7 +114,7 @@
                 Starlette
               </span>
               <span class="md-header-nav__topic">
-                Debugging
+                Debug
               </span>
             
           
@@ -243,6 +243,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../applications/" title="Applications" class="md-nav__link">
+      Applications
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../requests/" title="Requests" class="md-nav__link">
       Requests
     </a>
@@ -291,8 +303,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../exceptions/" title="Exceptions" class="md-nav__link">
-      Exceptions
+    <a href="../endpoints/" title="Endpoints" class="md-nav__link">
+      Endpoints
     </a>
   </li>
 
@@ -315,20 +327,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../applications/" title="Applications" class="md-nav__link">
-      Applications
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../testclient/" title="Test Client" class="md-nav__link">
-      Test Client
+    <a href="../exceptions/" title="Exceptions" class="md-nav__link">
+      Exceptions
     </a>
   </li>
 
@@ -345,8 +345,8 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
-    <a href="./" title="Debugging" class="md-nav__link md-nav__link--active">
-      Debugging
+    <a href="./" title="Debug" class="md-nav__link md-nav__link--active">
+      Debug
     </a>
     
   </li>
@@ -358,8 +358,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../endpoints/" title="Endpoints" class="md-nav__link">
-      Endpoints
+    <a href="../testclient/" title="Test Client" class="md-nav__link">
+      Test Client
     </a>
   </li>
 
@@ -377,7 +377,7 @@
               
                 
                 
-                  <h1>Debugging</h1>
+                  <h1>Debug</h1>
                 
                 <p>You can use Starlette's <code>DebugMiddleware</code> to display simple error tracebacks in the browser.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.debug</span> <span class="kn">import</span> <span class="n">DebugMiddleware</span>
@@ -396,7 +396,7 @@
 
 
 <p>For a mode complete handling of exception cases you may wish to use Starlette's
-<a href="../exceptions"><code>ExceptionMiddleware</code></a> class instead, which also includes
+<a href="../exceptions/"><code>ExceptionMiddleware</code></a> class instead, which also includes
 optional debug handling.</p>
                 
                   
@@ -418,7 +418,7 @@ optional debug handling.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../testclient/" title="Test Client" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../exceptions/" title="Exceptions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -427,19 +427,19 @@ optional debug handling.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Test Client
+                Exceptions
               </span>
             </div>
           </a>
         
         
-          <a href="../endpoints/" title="Endpoints" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../testclient/" title="Test Client" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Endpoints
+                Test Client
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
