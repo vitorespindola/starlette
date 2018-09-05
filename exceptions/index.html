@@ -247,8 +247,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../responses/" title="Responses" class="md-nav__link">
-      Responses
+    <a href="../requests/" title="Requests" class="md-nav__link">
+      Requests
     </a>
   </li>
 
@@ -259,8 +259,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../requests/" title="Requests" class="md-nav__link">
-      Requests
+    <a href="../responses/" title="Responses" class="md-nav__link">
+      Responses
     </a>
   </li>
 
@@ -372,7 +372,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../test_client/" title="Test Client" class="md-nav__link">
+    <a href="../testclient/" title="Test Client" class="md-nav__link">
       Test Client
     </a>
   </li>
@@ -384,7 +384,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../debugging/" title="Debugging" class="md-nav__link">
+    <a href="../debug/" title="Debugging" class="md-nav__link">
       Debugging
     </a>
   </li>
@@ -396,8 +396,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../views/" title="Views" class="md-nav__link">
-      Views
+    <a href="../endpoints/" title="Endpoints" class="md-nav__link">
+      Endpoints
     </a>
   </li>
 
@@ -474,7 +474,7 @@ default handler responds with when an <code>HTTPException</code> class or subcla
 <p>Let's change the exception handling, so that we get JSON error responses
 instead:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.exceptions</span> <span class="kn">import</span> <span class="n">ExceptionMiddleware</span><span class="p">,</span> <span class="n">HTTPException</span>
-<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
 
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">:</span>

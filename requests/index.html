@@ -245,18 +245,6 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../responses/" title="Responses" class="md-nav__link">
-      Responses
-    </a>
-  </li>
-
-    
-      
-      
-      
-
   
 
 
@@ -346,6 +334,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../responses/" title="Responses" class="md-nav__link">
+      Responses
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../websockets/" title="WebSockets" class="md-nav__link">
       WebSockets
     </a>
@@ -406,7 +406,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../test_client/" title="Test Client" class="md-nav__link">
+    <a href="../testclient/" title="Test Client" class="md-nav__link">
       Test Client
     </a>
   </li>
@@ -418,7 +418,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../debugging/" title="Debugging" class="md-nav__link">
+    <a href="../debug/" title="Debugging" class="md-nav__link">
       Debugging
     </a>
   </li>
@@ -430,8 +430,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../views/" title="Views" class="md-nav__link">
-      Views
+    <a href="../endpoints/" title="Endpoints" class="md-nav__link">
+      Endpoints
     </a>
   </li>
 
@@ -525,7 +525,7 @@
 the incoming request, rather than accessing the ASGI scope and receive channel directly.</p>
 <h3 id="request">Request</h3>
 <p>Signature: <code>Request(scope, receive=None)</code></p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.request</span> <span class="kn">import</span> <span class="n">Request</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.requests</span> <span class="kn">import</span> <span class="n">Request</span>
 <span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">Response</span>
 
 
@@ -564,8 +564,8 @@ components that can be parsed out of the URL.</p>
 <p>The request body as bytes: <code>await request.body()</code></p>
 <p>The request body, parsed as JSON: <code>await request.json()</code></p>
 <p>You can also access the request body as a stream, using the <code>async for</code> syntax:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.request</span> <span class="kn">import</span> <span class="n">Request</span>
-<span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.requests</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">Response</span>
 
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
@@ -605,7 +605,7 @@ raise an error.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../responses/" title="Responses" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -614,19 +614,19 @@ raise an error.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Responses
+                Introduction
               </span>
             </div>
           </a>
         
         
-          <a href="../websockets/" title="WebSockets" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../responses/" title="Responses" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                WebSockets
+                Responses
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

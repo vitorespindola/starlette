@@ -247,8 +247,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../responses/" title="Responses" class="md-nav__link">
-      Responses
+    <a href="../requests/" title="Requests" class="md-nav__link">
+      Requests
     </a>
   </li>
 
@@ -259,8 +259,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../requests/" title="Requests" class="md-nav__link">
-      Requests
+    <a href="../responses/" title="Responses" class="md-nav__link">
+      Responses
     </a>
   </li>
 
@@ -411,7 +411,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../debugging/" title="Debugging" class="md-nav__link">
+    <a href="../debug/" title="Debugging" class="md-nav__link">
       Debugging
     </a>
   </li>
@@ -423,8 +423,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../views/" title="Views" class="md-nav__link">
-      Views
+    <a href="../endpoints/" title="Endpoints" class="md-nav__link">
+      Endpoints
     </a>
   </li>
 
@@ -509,7 +509,7 @@
                 
                 <p>The test client allows you to make requests against your ASGI application,
 using the <code>requests</code> library.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
 <span class="kn">from</span> <span class="nn">starlette.testclient</span> <span class="kn">import</span> <span class="n">TestClient</span>
 
 
@@ -544,7 +544,7 @@ case you should use <code>client = TestClient(app, raise_server_exceptions=False
 can use the same authentication options and other headers between both http and
 websocket testing.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.testclient</span> <span class="kn">import</span> <span class="n">TestClient</span>
-<span class="kn">from</span> <span class="nn">starlette.websockets</span> <span class="kn">import</span> <span class="n">WebSocketSession</span>
+<span class="kn">from</span> <span class="nn">starlette.websockets</span> <span class="kn">import</span> <span class="n">WebSocket</span>
 
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
@@ -552,16 +552,16 @@ websocket testing.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
 
     <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">WebSocketSession</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="o">=</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">session</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="n">await</span> <span class="n">session</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">websocket</span> <span class="o">=</span> <span class="n">WebSocket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="o">=</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">test_app</span><span class="p">():</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">App</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">websocket_connect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">websocket_connect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">websocket</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">websocket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;Hello, world!&#39;</span>
 </pre></div>
 
@@ -628,7 +628,7 @@ always raised by the test client.</p>
           </a>
         
         
-          <a href="../debugging/" title="Debugging" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../debug/" title="Debugging" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">

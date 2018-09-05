@@ -247,8 +247,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../responses/" title="Responses" class="md-nav__link">
-      Responses
+    <a href="../requests/" title="Requests" class="md-nav__link">
+      Requests
     </a>
   </li>
 
@@ -259,8 +259,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../requests/" title="Requests" class="md-nav__link">
-      Requests
+    <a href="../responses/" title="Responses" class="md-nav__link">
+      Responses
     </a>
   </li>
 
@@ -365,7 +365,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../test_client/" title="Test Client" class="md-nav__link">
+    <a href="../testclient/" title="Test Client" class="md-nav__link">
       Test Client
     </a>
   </li>
@@ -377,7 +377,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../debugging/" title="Debugging" class="md-nav__link">
+    <a href="../debug/" title="Debugging" class="md-nav__link">
       Debugging
     </a>
   </li>
@@ -389,8 +389,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../views/" title="Views" class="md-nav__link">
-      Views
+    <a href="../endpoints/" title="Endpoints" class="md-nav__link">
+      Endpoints
     </a>
   </li>
 
@@ -481,9 +481,9 @@ responses for requests which do not match.</p>
 <h3 id="protocol-routing">Protocol Routing</h3>
 <p>You can also route based on the incoming protocol, using the <code>ProtocolRouter</code>
 class.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">Response</span>
 <span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">ProtocolRouter</span>
-<span class="kn">from</span> <span class="nn">starlette.websockets</span> <span class="kn">import</span> <span class="n">WebSocketSession</span>
+<span class="kn">from</span> <span class="nn">starlette.websockets</span> <span class="kn">import</span> <span class="n">WebSocket</span>
 
 
 <span class="k">def</span> <span class="nf">http_endpoint</span><span class="p">(</span><span class="n">scope</span><span class="p">):</span>
@@ -492,10 +492,10 @@ class.</p>
 
 <span class="k">def</span> <span class="nf">websocket_endpoint</span><span class="p">(</span><span class="n">scope</span><span class="p">):</span>
     <span class="n">async</span> <span class="k">def</span> <span class="nf">asgi</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">WebSocketSession</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">session</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="n">await</span> <span class="n">session</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
-        <span class="n">await</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">websocket</span> <span class="o">=</span> <span class="n">WebSocket</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">asgi</span>
 
 

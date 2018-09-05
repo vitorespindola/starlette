@@ -282,6 +282,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dependencies" title="Dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-or-toolkit" title="Framework or Toolkit" class="md-nav__link">
+    Framework or Toolkit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity" title="Modularity" class="md-nav__link">
+    Modularity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" title="Performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
       
       
       
@@ -299,8 +327,8 @@
 
 
   <li class="md-nav__item">
-    <a href="responses/" title="Responses" class="md-nav__link">
-      Responses
+    <a href="requests/" title="Requests" class="md-nav__link">
+      Requests
     </a>
   </li>
 
@@ -311,8 +339,8 @@
 
 
   <li class="md-nav__item">
-    <a href="requests/" title="Requests" class="md-nav__link">
-      Requests
+    <a href="responses/" title="Responses" class="md-nav__link">
+      Responses
     </a>
   </li>
 
@@ -383,7 +411,7 @@
 
 
   <li class="md-nav__item">
-    <a href="test_client/" title="Test Client" class="md-nav__link">
+    <a href="testclient/" title="Test Client" class="md-nav__link">
       Test Client
     </a>
   </li>
@@ -395,7 +423,7 @@
 
 
   <li class="md-nav__item">
-    <a href="debugging/" title="Debugging" class="md-nav__link">
+    <a href="debug/" title="Debugging" class="md-nav__link">
       Debugging
     </a>
   </li>
@@ -407,8 +435,8 @@
 
 
   <li class="md-nav__item">
-    <a href="views/" title="Views" class="md-nav__link">
-      Views
+    <a href="endpoints/" title="Endpoints" class="md-nav__link">
+      Endpoints
     </a>
   </li>
 
@@ -454,6 +482,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dependencies" title="Dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-or-toolkit" title="Framework or Toolkit" class="md-nav__link">
+    Framework or Toolkit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity" title="Modularity" class="md-nav__link">
+    Modularity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" title="Performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
       
       
       
@@ -476,7 +532,7 @@
 </p>
 
 <p align="center">
-    <em>✨ The little ASGI library that shines. ✨</em>
+    <em>✨ The little ASGI framework that shines. ✨</em>
 </p>
 
 <p align="center">
@@ -493,9 +549,9 @@
 
 <hr />
 <h1 id="introduction">Introduction</h1>
-<p>Starlette is a small library for working with <a href="https://asgi.readthedocs.io/en/latest/">ASGI</a>.</p>
-<p>It gives you <code>Request</code> and <code>Response</code> classes, request routing, websocket support,
-static files support, and a test client.</p>
+<p>Starlette is a lightweight <a href="https://asgi.readthedocs.io/en/latest/">ASGI</a> framework/toolkit.</p>
+<p>It is ideal for building high performance asyncio services, and supports both
+HTTP and WebSockets.</p>
 <h2 id="requirements">Requirements</h2>
 <p>Python 3.6+</p>
 <h2 id="installation">Installation</h2>
@@ -503,8 +559,39 @@ static files support, and a test client.</p>
 </pre></div>
 
 
+<p>You'll also want to install an ASGI server, such as <a href="http://www.uvicorn.org/">uvicorn</a>, <a href="https://github.com/django/daphne/">daphne</a>, or <a href="https://pgjones.gitlab.io/hypercorn/">hypercorn</a>.</p>
+<div class="codehilite"><pre><span></span>$ pip3 install uvicorn
+</pre></div>
+
+
 <h2 id="example">Example</h2>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+<span class="kn">import</span> <span class="nn">uvicorn</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8001</span><span class="p">,</span> <span class="n">access_log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="dependencies">Dependencies</h2>
+<p>Starlette does not have any hard dependencies, but the following are optional:</p>
+<ul>
+<li><code>requests</code> - Required if you want to use the <code>TestClient</code>.</li>
+<li><code>aiofiles</code> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
+<li><code>ujson</code> - Optionally used for <code>JSONResponse</code>.</li>
+</ul>
+<p>You can install all three of these with <code>pip3 install starlette[full]</code>.</p>
+<h2 id="framework-or-toolkit">Framework or Toolkit</h2>
+<p>Starlette is designed to be used either as a complete framework, or as
+an ASGI toolkit. You can use any of its components independently.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
 
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
@@ -512,16 +599,8 @@ static files support, and a test client.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
 
     <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s1">&#39;text/plain&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
         <span class="n">await</span> <span class="n">response</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</pre></div>
-
-
-<p>You can run the application with any ASGI server, including <a href="http://www.uvicorn.org/">uvicorn</a>, <a href="https://github.com/django/daphne/">daphne</a>, or <a href="https://pgjones.gitlab.io/hypercorn/">hypercorn</a>.</p>
-<p>Install the Uvicorn ASGI server:</p>
-<div class="codehilite"><pre><span></span>$ pip3 install uvicorn
-<span class="o">[</span>...<span class="o">]</span>
-Successfully installed uvicorn
 </pre></div>
 
 
@@ -532,6 +611,25 @@ INFO: Uvicorn running on http://127.0.0.1:8000 <span class="o">(</span>Press CTR
 </pre></div>
 
 
+<h2 id="modularity">Modularity</h2>
+<p>The modularity that Starlette is designed on promotes building re-usable
+components that can be shared between any ASGI framework. This should enable
+an ecosystem of shared middleware and mountable applications.</p>
+<p>The clean API separation also means it's easier to understand each component
+in isolation.</p>
+<h2 id="performance">Performance</h2>
+<p>Our testing shows that Starlette applications running under Uvicorn as one of
+the fastest Python frameworks available. As an example, application performance
+should roughly equal or out-perform Sanic.</p>
+<p>For high throughput loads you should:</p>
+<ul>
+<li>Make sure to install <code>ujson</code>.</li>
+<li>Run using <code>uvicorn</code>, with access logging disabled.</li>
+</ul>
+<p>Several of the ASGI servers also have pure Python implementations available,
+so you can also run under <code>PyPy</code> if your application code has parts that are
+CPU constrained.</p>
+<p>Eg. <code>uvicorn.run(..., http='h11', loop='asyncio')</code></p>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 
 <p align="center"><i>Starlette is <a href="https://github.com/tomchristie/starlette/blob/master/LICENSE.md">BSD licensed</a> code. Designed & built in Brighton, England.</i></p>
@@ -556,13 +654,13 @@ INFO: Uvicorn running on http://127.0.0.1:8000 <span class="o">(</span>Press CTR
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="responses/" title="Responses" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="requests/" title="Requests" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Responses
+                Requests
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
