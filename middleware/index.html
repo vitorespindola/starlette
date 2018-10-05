@@ -38,7 +38,7 @@
     
     
       
-        <title>Background Tasks - Starlette</title>
+        <title>Middleware - Starlette</title>
       
     
     
@@ -92,7 +92,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#background-task" tabindex="1" class="md-skip">
+      <a href="../#corsmiddleware" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -118,7 +118,7 @@
                 Starlette
               </span>
               <span class="md-header-nav__topic">
-                Background Tasks
+                Middleware
               </span>
             
           
@@ -317,11 +317,86 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../middleware/" title="Middleware" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Middleware
+      </label>
+    
+    <a href="./" title="Middleware" class="md-nav__link md-nav__link--active">
       Middleware
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#corsmiddleware" title="CORSMiddleware" class="md-nav__link">
+    CORSMiddleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cors-preflight-requests" title="CORS preflight requests" class="md-nav__link">
+    CORS preflight requests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-requests" title="Simple requests" class="md-nav__link">
+    Simple requests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httpsredirectmiddleware" title="HTTPSRedirectMiddleware" class="md-nav__link">
+    HTTPSRedirectMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trustedhostmiddleware" title="TrustedHostMiddleware" class="md-nav__link">
+    TrustedHostMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-asgi-middleware-without-starlette" title="Using ASGI middleware without Starlette" class="md-nav__link">
+    Using ASGI middleware without Starlette
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -341,45 +416,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Background Tasks
-      </label>
-    
-    <a href="./" title="Background Tasks" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../background/" title="Background Tasks" class="md-nav__link">
       Background Tasks
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#background-task" title="Background Task" class="md-nav__link">
-    Background Task
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -438,8 +479,49 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#background-task" title="Background Task" class="md-nav__link">
-    Background Task
+  <a href="#corsmiddleware" title="CORSMiddleware" class="md-nav__link">
+    CORSMiddleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cors-preflight-requests" title="CORS preflight requests" class="md-nav__link">
+    CORS preflight requests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-requests" title="Simple requests" class="md-nav__link">
+    Simple requests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httpsredirectmiddleware" title="HTTPSRedirectMiddleware" class="md-nav__link">
+    HTTPSRedirectMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trustedhostmiddleware" title="TrustedHostMiddleware" class="md-nav__link">
+    TrustedHostMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-asgi-middleware-without-starlette" title="Using ASGI middleware without Starlette" class="md-nav__link">
+    Using ASGI middleware without Starlette
   </a>
   
 </li>
@@ -461,31 +543,99 @@
               
                 
                 
-                  <h1>Background Tasks</h1>
+                  <h1>Middleware</h1>
                 
-                <p>Starlette includes a <code>BackgroundTask</code> class for in-process background tasks.</p>
-<p>A background task should be attached to a response, and will run only once
-the response has been sent.</p>
-<h3 id="background-task">Background Task</h3>
-<p>Signature: <code>BackgroundTask(func, *args, **kwargs)</code></p>
+                <p>Starlette includes several middleware classes for adding behaviour that is applied across your entire application. These are all implemented as standard ASGI
+middleware classes, and can be applied either to Starlette or to any other ASGI application.</p>
+<p>The Starlette application class allows you to include the ASGI middleware
+in a way that ensures that it remains wrapped by the exception handler.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
-<span class="kn">from</span> <span class="nn">starlette.background</span> <span class="kn">import</span> <span class="n">BackgroundTask</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.httpsredirect</span> <span class="kn">import</span> <span class="n">HTTPSRedirectMiddleware</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.trustedhost</span> <span class="kn">import</span> <span class="n">TrustedHostMiddleware</span>
+
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/user/signup&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
-<span class="n">async</span> <span class="k">def</span> <span class="nf">signup</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="n">BackgroundTask</span><span class="p">(</span><span class="n">send_welcome_email</span><span class="p">,</span> <span class="n">to_address</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Signup successful&#39;</span><span class="p">}</span>
-    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
-
-<span class="n">async</span> <span class="k">def</span> <span class="nf">send_welcome_email</span><span class="p">(</span><span class="n">to_address</span><span class="p">):</span>
-    <span class="o">...</span>
+<span class="c1"># Ensure that all requests include an &#39;example.com&#39; host header,</span>
+<span class="c1"># and strictly enforce https-only access.</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">HTTPSRedirectMiddleware</span><span class="p">)</span>
 </pre></div>
+
+
+<p>The following middleware implementations are available in the Starlette package:</p>
+<h2 id="corsmiddleware">CORSMiddleware</h2>
+<p>Adds appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS headers</a> to outgoing responses in order to allow cross-origin requests from browsers.</p>
+<p>The default parameters used by the CORSMiddleware implementation are restrictive by default,
+so you'll need to explicitly enable particular origins, methods, or headers, in order
+for browsers to be permitted to use them in a Cross-Domain context.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.cors</span> <span class="kn">import</span> <span class="n">CORSMiddleware</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">CORSMiddleware</span><span class="p">,</span> <span class="n">allow_origins</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>The following arguments are supported:</p>
+<ul>
+<li><code>allow_origins</code> - A list of origins that should be permitted to make cross-origin requests. eg. <code>['https://example.org', 'https://www.example.org']</code>. You can use <code>['*']</code> to allow any origin.</li>
+<li><code>allow_methods</code> - A list of HTTP methods that should be allowed for cross-origin requests. Defaults to <code>['GET']</code>. You can use <code>['*']</code> to allow all standard methods.</li>
+<li><code>allow_headers</code> - A list of HTTP request headers that should be supported for cross-origin requests. Defaults to <code>[]</code>. You can use <code>['*']</code> to allow all headers. The <code>Accept</code>, <code>Accept-Language</code>, <code>Content-Language</code> and <code>Content-Type</code> headers are always allowed for CORS requests.</li>
+<li><code>allow_credentials</code> - Indicate that cookies should be supported for cross-origin requests. Defaults to <code>False</code>.</li>
+<li><code>expose_headers</code> - Indicate any response headers that should be made accessible to the browser. Defaults to <code>[]</code>.</li>
+<li><code>max_age</code> - Sets a maximum time in seconds for browsers to cache CORS responses. Defaults to <code>60</code>.</li>
+</ul>
+<p>The middleware responds to two particular types of HTTP request...</p>
+<h4 id="cors-preflight-requests">CORS preflight requests</h4>
+<p>These are any <code>OPTION</code> request with <code>Origin</code> and <code>Access-Control-Request-Method</code> headers.
+In this case the middleware will intercept the incoming request and respond with
+appropriate CORS headers, and either a 200 or 400 response for informational purposes.</p>
+<h4 id="simple-requests">Simple requests</h4>
+<p>Any request with an <code>Origin</code> header. In this case the middleware will pass the
+request through as normal, but will include appropriate CORS headers on the response.</p>
+<h2 id="httpsredirectmiddleware">HTTPSRedirectMiddleware</h2>
+<p>Enforces that all incoming requests must either be <code>https</code> or <code>wss</code>. Any incoming
+requests to <code>http</code> or <code>ws</code> will be redirected to the secure scheme instead.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.httpsredirect</span> <span class="kn">import</span> <span class="n">HTTPSRedirectMiddleware</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">HTTPSRedirectMiddleware</span><span class="p">)</span>
+</pre></div>
+
+
+<p>There are no configuration options for this middleware class.</p>
+<h2 id="trustedhostmiddleware">TrustedHostMiddleware</h2>
+<p>Enforces that all incoming requests have a correctly set <code>Host</code> header, in order
+to guard against HTTP Host Header attacks.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.trustedhost</span> <span class="kn">import</span> <span class="n">TrustedHostMiddleware</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>The following arguments are supported:</p>
+<ul>
+<li><code>allowed_hosts</code> - A list of domain names that should be allowed as hostnames.</li>
+</ul>
+<p>If an incoming request does not validate correctly then a 400 response will be sent.</p>
+<h2 id="using-asgi-middleware-without-starlette">Using ASGI middleware without Starlette</h2>
+<p>To wrap ASGI middleware around other ASGI applications, you should use the
+more general pattern of wrapping the application instance:</p>
+<div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">TrustedHostMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>You can do this with a Starlette application instance too, but it is preferable
+to use <code>.add_middleware</code>, as it'll ensure that you don't lose the reference
+to the application object, and that the exception handling always wraps around
+any other behaviour.</p>
                 
                   
                 
@@ -506,7 +656,7 @@ the response has been sent.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../staticfiles/" title="Static Files" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../endpoints/" title="Endpoints" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -515,19 +665,19 @@ the response has been sent.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Static Files
+                Endpoints
               </span>
             </div>
           </a>
         
         
-          <a href="../exceptions/" title="Exceptions" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../staticfiles/" title="Static Files" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Exceptions
+                Static Files
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
