@@ -38,7 +38,7 @@
     
     
       
-        <title>Debug - Starlette</title>
+        <title>Events - Starlette</title>
       
     
     
@@ -92,6 +92,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="../#registering-events" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -114,7 +118,7 @@
                 Starlette
               </span>
               <span class="md-header-nav__topic">
-                Debug
+                Events
               </span>
             
           
@@ -337,11 +341,52 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../events/" title="Events" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Events
+      </label>
+    
+    <a href="./" title="Events" class="md-nav__link md-nav__link--active">
       Events
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#registering-events" title="Registering events" class="md-nav__link">
+    Registering events
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-event-handers-in-tests" title="Running event handers in tests" class="md-nav__link">
+    Running event handers in tests
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -373,18 +418,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Debug" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../debug/" title="Debug" class="md-nav__link">
       Debug
     </a>
-    
   </li>
 
     
@@ -407,33 +445,98 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#registering-events" title="Registering events" class="md-nav__link">
+    Registering events
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-event-handers-in-tests" title="Running event handers in tests" class="md-nav__link">
+    Running event handers in tests
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Debug</h1>
+                  <h1>Events</h1>
                 
-                <p>You can use Starlette's <code>DebugMiddleware</code> to display simple error tracebacks in the browser.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.debug</span> <span class="kn">import</span> <span class="n">DebugMiddleware</span>
+                <p>Starlette applications can register multiple event handlers for dealing with
+code than needs to run before the application starts up, or when the application
+is shutting down.</p>
+<h2 id="registering-events">Registering events</h2>
+<p>These event handlers can either be <code>async</code> coroutines, or regular syncronous
+functions.</p>
+<p>The event handlers are registered with a decorator syntax, like so:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
 
 
-<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
 
-    <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Something went wrong&#39;</span><span class="p">)</span>
+<span class="nd">@app.on_event</span><span class="p">(</span><span class="s1">&#39;startup&#39;</span><span class="p">)</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">open_database_connection_pool</span><span class="p">():</span>
+    <span class="o">...</span>
 
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">DebugMiddleware</span><span class="p">(</span><span class="n">App</span><span class="p">)</span>
+<span class="nd">@app.on_event</span><span class="p">(</span><span class="s1">&#39;cleanup&#39;</span><span class="p">)</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">close_database_connection_pool</span><span class="p">():</span>
+    <span class="o">...</span>
 </pre></div>
 
 
-<p>For a mode complete handling of exception cases you may wish to use Starlette's
-<a href="../exceptions/"><code>ExceptionMiddleware</code></a> class instead, which also includes
-optional debug handling.</p>
+<p>Starlette will not start serving any incoming requests until all of the
+registered startup handlers have completed.</p>
+<p>The cleanup handlers will run once all connections have been closed, and
+any in-process background tasks have completed.</p>
+<p><strong>Note</strong>: The ASGI lifespan protocol has only recently been added to the spec,
+and is only currently supported by the <code>uvicorn</code> server. Make sure to use the
+latest <code>uvicorn</code> release if you need startup/cleanup support.</p>
+<h2 id="running-event-handers-in-tests">Running event handers in tests</h2>
+<p>You might want to explicitly call into your event handlers in any test setup
+or test teardown code.</p>
+<p>Alternatively, Starlette provides a context manager that ensures the
+lifespan events are called.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">example</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="kn">from</span> <span class="nn">starlette.lifespan</span> <span class="kn">import</span> <span class="n">LifespanContext</span>
+<span class="kn">from</span> <span class="nn">starlette.testclient</span> <span class="kn">import</span> <span class="n">TestClient</span>
+
+
+<span class="k">def</span> <span class="nf">test_homepage</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">LifespanContext</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+        <span class="c1"># Application &#39;startup&#39; handlers are called on entering the block.</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+
+    <span class="c1"># Application &#39;cleanup&#39; handlers are called on exiting the block.</span>
+</pre></div>
                 
                   
                 
@@ -454,7 +557,7 @@ optional debug handling.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../exceptions/" title="Exceptions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../staticfiles/" title="Static Files" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -463,19 +566,19 @@ optional debug handling.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Exceptions
+                Static Files
               </span>
             </div>
           </a>
         
         
-          <a href="../testclient/" title="Test Client" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../background/" title="Background Tasks" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Test Client
+                Background Tasks
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

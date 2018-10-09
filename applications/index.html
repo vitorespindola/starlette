@@ -398,6 +398,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../events/" title="Events" class="md-nav__link">
+      Events
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../background/" title="Background Tasks" class="md-nav__link">
       Background Tasks
     </a>
@@ -532,6 +544,11 @@ its other functionality.</p>
     <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
     <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="s1">&#39;Hello, websocket!&#39;</span><span class="p">)</span>
     <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="nd">@app.on_event</span><span class="p">(</span><span class="s1">&#39;startup&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">startup</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ready to go&#39;</span><span class="p">)</span>
 </pre></div>
 
 
