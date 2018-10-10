@@ -322,6 +322,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ujsonresponse" title="UJSONResponse" class="md-nav__link">
+    UJSONResponse
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#redirectresponse" title="RedirectResponse" class="md-nav__link">
     RedirectResponse
   </a>
@@ -520,6 +527,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ujsonresponse" title="UJSONResponse" class="md-nav__link">
+    UJSONResponse
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#redirectresponse" title="RedirectResponse" class="md-nav__link">
     RedirectResponse
   </a>
@@ -628,6 +642,25 @@ ASGI application instance.</p>
 
     <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">})</span>
+        <span class="n">await</span> <span class="n">response</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="ujsonresponse">UJSONResponse</h3>
+<p>A JSON response class that uses the optimised <code>ujson</code> library for serialisation.</p>
+<p>Using <code>ujson</code> will result in faster JSON serialisation, but is also less careful
+than Python's built-in implementation in how it handles some edge-cases.</p>
+<p>In general you <em>probably</em> want to stick with <code>JSONResponse</code> by default unless
+you are micro-optimising a particular endpoint.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">UJSONResponse</span>
+
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
+
+    <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">UJSONResponse</span><span class="p">({</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">})</span>
         <span class="n">await</span> <span class="n">response</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </pre></div>
 

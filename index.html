@@ -621,7 +621,7 @@ HTTP and WebSockets.</p>
 <ul>
 <li><code>requests</code> - Required if you want to use the <code>TestClient</code>.</li>
 <li><code>aiofiles</code> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
-<li><code>ujson</code> - Optionally used for <code>JSONResponse</code>.</li>
+<li><code>ujson</code> - Required if you want to use <code>UJSONResponse</code>.</li>
 </ul>
 <p>You can install all three of these with <code>pip3 install starlette[full]</code>.</p>
 <h2 id="framework-or-toolkit">Framework or Toolkit</h2>
@@ -659,7 +659,7 @@ the fastest Python frameworks available. As an example, application performance
 should roughly equal or out-perform Sanic.</p>
 <p>For high throughput loads you should:</p>
 <ul>
-<li>Make sure to install <code>ujson</code>.</li>
+<li>Make sure to install <code>ujson</code> and use <code>UJSONResponse</code>.</li>
 <li>Run using <code>uvicorn</code>, with access logging disabled.</li>
 </ul>
 <p>Several of the ASGI servers also have pure Python implementations available,
