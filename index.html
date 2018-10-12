@@ -621,9 +621,10 @@ HTTP and WebSockets.</p>
 <ul>
 <li><code>requests</code> - Required if you want to use the <code>TestClient</code>.</li>
 <li><code>aiofiles</code> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
+<li><code>python-multipart</code> - Required if you want to support form parsing, with <code>request.form()</code>.</li>
 <li><code>ujson</code> - Required if you want to use <code>UJSONResponse</code>.</li>
 </ul>
-<p>You can install all three of these with <code>pip3 install starlette[full]</code>.</p>
+<p>You can install all of these with <code>pip3 install starlette[full]</code>.</p>
 <h2 id="framework-or-toolkit">Framework or Toolkit</h2>
 <p>Starlette is designed to be used either as a complete framework, or as
 an ASGI toolkit. You can use any of its components independently.</p>

@@ -598,6 +598,7 @@ components that can be parsed out of the URL.</p>
 <h4 id="body">Body</h4>
 <p>There are a few different interfaces for returning the body of the request:</p>
 <p>The request body as bytes: <code>await request.body()</code></p>
+<p>The request body, parsed as form data or multipart: <code>await request.form()</code></p>
 <p>The request body, parsed as JSON: <code>await request.json()</code></p>
 <p>You can also access the request body as a stream, using the <code>async for</code> syntax:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.requests</span> <span class="kn">import</span> <span class="n">Request</span>
@@ -619,8 +620,8 @@ components that can be parsed out of the URL.</p>
 
 
 <p>If you access <code>.stream()</code> then the byte chunks are provided without storing
-the entire body to memory. Any subsequent calls to <code>.body()</code> and <code>.json()</code> will
-raise an error.</p>
+the entire body to memory. Any subsequent calls to <code>.body()</code>, <code>.form(), or</code>.json()`
+will raise an error.</p>
                 
                   
                 
