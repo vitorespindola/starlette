@@ -383,6 +383,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gzipmiddleware" title="GZipMiddleware" class="md-nav__link">
+    GZipMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-asgi-middleware-without-starlette" title="Using ASGI middleware without Starlette" class="md-nav__link">
     Using ASGI middleware without Starlette
   </a>
@@ -532,6 +539,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gzipmiddleware" title="GZipMiddleware" class="md-nav__link">
+    GZipMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-asgi-middleware-without-starlette" title="Using ASGI middleware without Starlette" class="md-nav__link">
     Using ASGI middleware without Starlette
   </a>
@@ -638,6 +652,22 @@ to guard against HTTP Host Header attacks.</p>
 <li><code>allowed_hosts</code> - A list of domain names that should be allowed as hostnames.</li>
 </ul>
 <p>If an incoming request does not validate correctly then a 400 response will be sent.</p>
+<h2 id="gzipmiddleware">GZipMiddleware</h2>
+<p>Handles GZip responses for any request that includes <code>"gzip"</code> in the <code>Accept-Encoding</code> header.</p>
+<p>The middleware will handle both standard and streaming responses.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.trustedhost</span> <span class="kn">import</span> <span class="n">TrustedHostMiddleware</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">GZipMiddleware</span><span class="p">,</span> <span class="n">minimum_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The following arguments are supported:</p>
+<ul>
+<li><code>minimum_size</code> - Do not GZip responses that are smaller than this minimum size in bytes. Defaults to <code>500</code>.</li>
+</ul>
 <h2 id="using-asgi-middleware-without-starlette">Using ASGI middleware without Starlette</h2>
 <p>To wrap ASGI middleware around other ASGI applications, you should use the
 more general pattern of wrapping the application instance:</p>
