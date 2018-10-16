@@ -585,9 +585,19 @@
 
 <hr />
 <h1 id="introduction">Introduction</h1>
-<p>Starlette is a lightweight <a href="https://asgi.readthedocs.io/en/latest/">ASGI</a> framework/toolkit.</p>
-<p>It is ideal for building high performance asyncio services, and supports both
-HTTP and WebSockets.</p>
+<p>Starlette is a lightweight <a href="https://asgi.readthedocs.io/en/latest/">ASGI</a> framework/toolkit,
+which is ideal for building high performance asyncio services.</p>
+<p>It is production-ready, and gives you the following:</p>
+<ul>
+<li>Seriously impressive performance.</li>
+<li>WebSocket support.</li>
+<li>In-process background tasks.</li>
+<li>Startup and shutdown events.</li>
+<li>Test client built on <code>requests</code>.</li>
+<li>CORS, GZip, Static Files, Streaming responses.</li>
+<li>100% test coverage.</li>
+<li>100% type annotated codebase.</li>
+</ul>
 <h2 id="requirements">Requirements</h2>
 <p>Python 3.6+</p>
 <h2 id="installation">Installation</h2>
@@ -608,7 +618,7 @@ HTTP and WebSockets.</p>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">})</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
