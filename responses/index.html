@@ -298,6 +298,26 @@
     Response
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-cookie" title="Set Cookie" class="md-nav__link">
+    Set Cookie
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-cookie" title="Delete Cookie" class="md-nav__link">
+    Delete Cookie
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -503,6 +523,26 @@
     Response
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-cookie" title="Set Cookie" class="md-nav__link">
+    Set Cookie
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-cookie" title="Delete Cookie" class="md-nav__link">
+    Delete Cookie
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -601,6 +641,22 @@ ASGI application instance.</p>
 </pre></div>
 
 
+<h4 id="set-cookie">Set Cookie</h4>
+<p>Starlette provides a <code>set_cookie</code> method to allow you to set cookies on the response object.</p>
+<p>Signature: <code>Response.set_cookie(key, value, max_age=None, expires=None, path="/", domain=None, secure=False, httponly=False)</code></p>
+<ul>
+<li><code>key</code> - A string that will be the cookie's key.</li>
+<li><code>value</code> - A string that will be the cookie's value.</li>
+<li><code>max_age</code> - An integer that defines the lifetime of the cookie in seconds. A negative integer or a value of <code>0</code> will discard the cookie immediately. <code>Optional</code></li>
+<li><code>expires</code> - An integer that defines the number of seconds until the cookie expires. <code>Optional</code></li>
+<li><code>path</code> - A string that specifies the subset of routes to which the cookie will apply. <code>Optional</code></li>
+<li><code>domain</code> - A string that specifies the domain for which the cookie is valid. <code>Optional</code></li>
+<li><code>secure</code> - A bool indicating that the cookie will only be sent to the server if request is made using SSL and the HTTPS protocol. <code>Optional</code></li>
+<li><code>httponly</code> - A bool indicating that the cookie cannot be accessed via Javascript through <code>Document.cookie</code> property, the <code>XMLHttpRequest</code> or <code>Request</code> APIs. <code>Optional</code></li>
+</ul>
+<h4 id="delete-cookie">Delete Cookie</h4>
+<p>Conversly, Starlette also provides a <code>delete_cookie</code> method to manually expire a set cookie.</p>
+<p>Signature: <code>Response.delete_cookie(key, path='/', domain=None)</code></p>
 <h3 id="htmlresponse">HTMLResponse</h3>
 <p>Takes some text or bytes and returns an HTML response.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
