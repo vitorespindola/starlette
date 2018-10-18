@@ -295,6 +295,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../graphql/" title="GraphQL" class="md-nav__link">
+      GraphQL
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../routing/" title="Routing" class="md-nav__link">
       Routing
     </a>
@@ -656,7 +668,7 @@ to guard against HTTP Host Header attacks.</p>
 <p>Handles GZip responses for any request that includes <code>"gzip"</code> in the <code>Accept-Encoding</code> header.</p>
 <p>The middleware will handle both standard and streaming responses.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="kn">from</span> <span class="nn">starlette.middleware.trustedhost</span> <span class="kn">import</span> <span class="n">TrustedHostMiddleware</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.gzip</span> <span class="kn">import</span> <span class="n">GZipMiddleware</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>

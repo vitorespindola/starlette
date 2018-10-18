@@ -38,7 +38,7 @@
     
     
       
-        <title>Static Files - Starlette</title>
+        <title>Datastructures - Starlette</title>
       
     
     
@@ -114,7 +114,7 @@
                 Starlette
               </span>
               <span class="md-header-nav__topic">
-                Static Files
+                Datastructures
               </span>
             
           
@@ -337,18 +337,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Static Files" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../staticfiles/" title="Static Files" class="md-nav__link">
       Static Files
     </a>
-    
   </li>
 
     
@@ -425,29 +418,9 @@
               
                 
                 
-                  <h1>Static Files</h1>
+                  <h1>Datastructures</h1>
                 
-                <p>As well as the <code>FileResponse</code> class, Starlette also includes ASGI applications
-for serving a specific file or directory:</p>
-<ul>
-<li><code>StaticFile(path)</code> - Serve a single file, given by <code>path</code>.</li>
-<li><code>StaticFiles(directory)</code> - Serve any files in the given <code>directory</code>.</li>
-</ul>
-<p>You can combine these ASGI applications with Starlette's routing to provide
-comprehensive static file serving.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PathPrefix</span>
-<span class="kn">from</span> <span class="nn">starlette.staticfiles</span> <span class="kn">import</span> <span class="n">StaticFile</span><span class="p">,</span> <span class="n">StaticFiles</span>
-
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="p">[</span>
-    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">StaticFile</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;index.html&#39;</span><span class="p">)),</span>
-    <span class="n">PathPrefix</span><span class="p">(</span><span class="s1">&#39;/static&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">StaticFiles</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s1">&#39;static&#39;</span><span class="p">)),</span>
-<span class="p">])</span>
-</pre></div>
-
-
-<p>Static files will respond with "404 Not found" or "405 Method not allowed"
-responses for requests which do not match.</p>
+                
                 
                   
                 
@@ -464,41 +437,6 @@ responses for requests which do not match.</p>
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../middleware/" title="Middleware" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Middleware
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../events/" title="Events" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Events
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
