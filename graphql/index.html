@@ -490,7 +490,6 @@
                 <p>Starlette includes optional support for GraphQL, using the <code>graphene</code> library.</p>
 <p>Here's an example of integrating the support into your application.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="kn">from</span> <span class="nn">starlette.graphql</span> <span class="kn">import</span> <span class="n">GraphQLApp</span>
 <span class="kn">import</span> <span class="nn">graphene</span>
 
 
@@ -501,23 +500,22 @@
         <span class="k">return</span> <span class="s2">&quot;Hello &quot;</span> <span class="o">+</span> <span class="n">name</span>
 
 
-<span class="n">schema</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">)</span>
-
-
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">GraphQLApp</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">),</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_graphql_route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">graphene</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">))</span>
 </pre></div>
 
 
+<p>If you load up the page in a browser, you'll be served the GraphiQL tool,
+which you can use to interact with your GraphQL API.</p>
+<p><img alt="GraphiQL" src="../img/graphiql.png" /></p>
 <h2 id="sync-or-async-executors">Sync or Async executors</h2>
 <p>If you're working with a standard ORM, then just use regular function calls for
 your "resolve" methods, and Starlette will manage running the GraphQL query within a
 seperate thread.</p>
 <p>If you want to use an asyncronous ORM, then use "async resolve" methods, and
-make sure to setup Graphene's AsyncioExecutor.</p>
+make sure to setup Graphene's AsyncioExecutor using the <code>executor</code> argument.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">graphql.execution.executors.asyncio</span> <span class="kn">import</span> <span class="n">AsyncioExecutor</span>
 <span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="kn">from</span> <span class="nn">starlette.graphql</span> <span class="kn">import</span> <span class="n">GraphQLApp</span>
 <span class="kn">import</span> <span class="nn">graphene</span>
 
 
@@ -529,11 +527,10 @@ make sure to setup Graphene's AsyncioExecutor.</p>
         <span class="k">return</span> <span class="s2">&quot;Hello &quot;</span> <span class="o">+</span> <span class="n">name</span>
 
 
-<span class="n">schema</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">)</span>
-
-
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">GraphQLApp</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span> <span class="n">executor</span><span class="o">=</span><span class="n">AsyncioExecutor</span><span class="p">()),</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+
+<span class="c1"># We&#39;re using `executor=AsyncioExecutor()` here.</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_graphql_route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">graphene</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">),</span> <span class="n">executor</span><span class="o">=</span><span class="n">AsyncioExecutor</span><span class="p">())</span>
 </pre></div>
                 
                   
