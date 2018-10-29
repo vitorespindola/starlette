@@ -620,6 +620,7 @@ which is ideal for building high performance asyncio services.</p>
 <li>Startup and shutdown events.</li>
 <li>Test client built on <code>requests</code>.</li>
 <li>CORS, GZip, Static Files, Streaming responses.</li>
+<li>Session and Cookie support.</li>
 <li>100% test coverage.</li>
 <li>100% type annotated codebase.</li>
 <li>Zero hard dependencies.</li>
@@ -659,6 +660,7 @@ which is ideal for building high performance asyncio services.</p>
 <li><code>aiofiles</code> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
 <li><code>python-multipart</code> - Required if you want to support form parsing, with <code>request.form()</code>.</li>
 <li><code>graphene</code> - Required for GraphQL support.</li>
+<li><code>itsdangerous</code> - Required for SessionMiddleware support.</li>
 <li><code>ujson</code> - Required if you want to use <code>UJSONResponse</code>.</li>
 </ul>
 <p>You can install all of these with <code>pip3 install starlette[full]</code>.</p>

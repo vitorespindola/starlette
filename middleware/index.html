@@ -381,6 +381,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sessionmiddleware" title="SessionMiddleware" class="md-nav__link">
+    SessionMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#httpsredirectmiddleware" title="HTTPSRedirectMiddleware" class="md-nav__link">
     HTTPSRedirectMiddleware
   </a>
@@ -556,6 +563,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sessionmiddleware" title="SessionMiddleware" class="md-nav__link">
+    SessionMiddleware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#httpsredirectmiddleware" title="HTTPSRedirectMiddleware" class="md-nav__link">
     HTTPSRedirectMiddleware
   </a>
@@ -660,6 +674,14 @@ appropriate CORS headers, and either a 200 or 400 response for informational pur
 <h4 id="simple-requests">Simple requests</h4>
 <p>Any request with an <code>Origin</code> header. In this case the middleware will pass the
 request through as normal, but will include appropriate CORS headers on the response.</p>
+<h2 id="sessionmiddleware">SessionMiddleware</h2>
+<p>Adds signed cookie-based HTTP sessions. Session information is readable but not modifiable.</p>
+<p>Access or modify the session data using the <code>request.session</code> dictionary interface.</p>
+<p>The following arguments are supported:</p>
+<ul>
+<li><code>secret_key</code> - Should be a random string.</li>
+<li><code>session_cookie</code> - Defaults to "session".</li>
+</ul>
 <h2 id="httpsredirectmiddleware">HTTPSRedirectMiddleware</h2>
 <p>Enforces that all incoming requests must either be <code>https</code> or <code>wss</code>. Any incoming
 requests to <code>http</code> or <code>ws</code> will be redirected to the secure scheme instead.</p>
