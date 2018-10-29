@@ -453,15 +453,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#requesturl_forname-path_params" title="request.url_for(name, **path_params)" class="md-nav__link">
-    request.url_for(name, **path_params)
+  <a href="#requesturl_for" title="request.url_for()" class="md-nav__link">
+    request.url_for()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#appurl_path_forname-path_params" title="app.url_path_for(name, **path_params)" class="md-nav__link">
-    app.url_path_for(name, **path_params)
+  <a href="#appurl_path_for" title="app.url_path_for()" class="md-nav__link">
+    app.url_path_for()
   </a>
   
 </li>
@@ -530,15 +530,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#requesturl_forname-path_params" title="request.url_for(name, **path_params)" class="md-nav__link">
-    request.url_for(name, **path_params)
+  <a href="#requesturl_for" title="request.url_for()" class="md-nav__link">
+    request.url_for()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#appurl_path_forname-path_params" title="app.url_path_for(name, **path_params)" class="md-nav__link">
-    app.url_path_for(name, **path_params)
+  <a href="#appurl_path_for" title="app.url_path_for()" class="md-nav__link">
+    app.url_path_for()
   </a>
   
 </li>
@@ -583,7 +583,7 @@
                 
                 <h2 id="060">0.6.0</h2>
 <h3 id="requestpath_params">request.path_params</h3>
-<p>The biggest change here is that endpoint signatures are no longer:</p>
+<p>The biggest change in 0.6 is that endpoint signatures are no longer:</p>
 <div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span>
 </pre></div>
 
@@ -596,11 +596,11 @@
 <p>The path parameters are available on the request as <code>request.path_params</code>.</p>
 <p>This is different to most Python webframeworks, but I think it actually ends up
 being much more nicely consistent all the way through.</p>
-<h3 id="requesturl_forname-path_params">request.url_for(name, **path_params)</h3>
+<h3 id="requesturl_for">request.url_for()</h3>
 <p>Request and WebSocketSession now support URL reversing with <code>request.url_for(name, **path_params)</code>.
 This method returns a fully qualified <code>URL</code> instance.
 The URL instance is a string-like object.</p>
-<h3 id="appurl_path_forname-path_params">app.url_path_for(name, **path_params)</h3>
+<h3 id="appurl_path_for">app.url_path_for()</h3>
 <p>Applications now support URL path reversing with <code>app.url_path_for(name, **path_params)</code>.
 This method returns a <code>URL</code> instance with the path and scheme set.
 The URL instance is a string-like object, and will return only the path if coerced to a string.</p>
