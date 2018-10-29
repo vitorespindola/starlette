@@ -442,6 +442,19 @@
     0.6.1
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basehttpmiddleware" title="BaseHTTPMiddleware" class="md-nav__link">
+    BaseHTTPMiddleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -526,6 +539,19 @@
     0.6.1
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basehttpmiddleware" title="BaseHTTPMiddleware" class="md-nav__link">
+    BaseHTTPMiddleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -596,11 +622,13 @@
                   <h1>Release Notes</h1>
                 
                 <h2 id="061">0.6.1</h2>
+<h3 id="basehttpmiddleware">BaseHTTPMiddleware</h3>
 <p>Added support for <code>BaseHTTPMiddleware</code>, which provides a standard
 request/response interface over a regular ASGI middleware.</p>
 <p>This means you can write ASGI middleware while still working at
 a request/response level, rather than handling ASGI messages directly.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.middleware.base</span> <span class="kn">import</span> <span class="n">BaseHTTPMiddleware</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.base</span> <span class="kn">import</span> <span class="n">BaseHTTPMiddleware</span>
 
 
 <span class="k">class</span> <span class="nc">CustomMiddleware</span><span class="p">(</span><span class="n">BaseHTTPMiddleware</span><span class="p">):</span>
@@ -608,6 +636,10 @@ a request/response level, rather than handling ASGI messages directly.</p>
         <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Custom-Header&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Example&#39;</span>
         <span class="k">return</span> <span class="n">response</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">CustomMiddleware</span><span class="p">)</span>
 </pre></div>
 
 
