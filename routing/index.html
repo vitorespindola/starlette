@@ -92,10 +92,6 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#protocol-routing" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -313,36 +309,9 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Routing
-      </label>
-    
     <a href="./" title="Routing" class="md-nav__link md-nav__link--active">
       Routing
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#protocol-routing" title="Protocol Routing" class="md-nav__link">
-    Protocol Routing
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
     
   </li>
 
@@ -443,41 +412,24 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
                 </div>
               </div>
             
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#protocol-routing" title="Protocol Routing" class="md-nav__link">
-    Protocol Routing
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           <div class="md-content">
@@ -488,37 +440,32 @@
                   <h1>Routing</h1>
                 
                 <p>Starlette includes a <code>Router</code> class which is an ASGI application that
-dispatches to other ASGI applications.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PathPrefix</span>
+dispatches incoming requests to endpoints or submounted applications.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">Mount</span><span class="p">,</span> <span class="n">Route</span><span class="p">,</span> <span class="n">Router</span>
 <span class="kn">from</span> <span class="nn">myproject</span> <span class="kn">import</span> <span class="n">Homepage</span><span class="p">,</span> <span class="n">SubMountedApp</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">Homepage</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
-    <span class="n">PathPrefix</span><span class="p">(</span><span class="s1">&#39;/mount/&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">SubMountedApp</span><span class="p">)</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">Homepage</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
+    <span class="n">Mount</span><span class="p">(</span><span class="s1">&#39;/mount&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">SubMountedApp</span><span class="p">)</span>
 <span class="p">])</span>
 </pre></div>
 
 
 <p>Paths can use URI templating style to capture path components.</p>
-<div class="codehilite"><pre><span></span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/users/{username}&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<div class="codehilite"><pre><span></span><span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/users/{username}&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 </pre></div>
 
 
-<p>Path components are made available in the scope, as <code>scope["kwargs"]</code>.</p>
-<p>You can also use regular expressions for more complicated matching.</p>
-<p>Named capture groups will be included in <code>scope["kwargs"]</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/users/(?P&lt;username&gt;[a-zA-Z0-9_]{1,20})&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-</pre></div>
-
-
-<p>Because each target of the router is an ASGI instance itself, routers
+<p>Path parameters are made available in the request, as the <code>request.path_params</code>
+dictionary.</p>
+<p>Because the target of a <code>Mount</code> is an ASGI instance itself, routers
 allow for easy composition. For example:</p>
 <div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">Homepage</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
-    <span class="n">PathPrefix</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">Router</span><span class="p">([</span>
-        <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">Users</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">]),</span>
-        <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/{username}&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">Homepage</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
+    <span class="n">Mount</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">Router</span><span class="p">([</span>
+        <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">Users</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">]),</span>
+        <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/{username}&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
     <span class="p">]))</span>
 <span class="p">])</span>
 </pre></div>
@@ -526,32 +473,6 @@ allow for easy composition. For example:</p>
 
 <p>The router will respond with "404 Not found" or "405 Method not allowed"
 responses for requests which do not match.</p>
-<h3 id="protocol-routing">Protocol Routing</h3>
-<p>You can also route based on the incoming protocol, using the <code>ProtocolRouter</code>
-class.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">Response</span>
-<span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">ProtocolRouter</span>
-<span class="kn">from</span> <span class="nn">starlette.websockets</span> <span class="kn">import</span> <span class="n">WebSocket</span>
-
-
-<span class="k">def</span> <span class="nf">http_endpoint</span><span class="p">(</span><span class="n">scope</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Hello, world&quot;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">websocket_endpoint</span><span class="p">(</span><span class="n">scope</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">asgi</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-        <span class="n">websocket</span> <span class="o">=</span> <span class="n">WebSocket</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
-        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">asgi</span>
-
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">ProtocolRouter</span><span class="p">({</span>
-    <span class="s2">&quot;http&quot;</span><span class="p">:</span> <span class="n">http_endpoint</span><span class="p">,</span>
-    <span class="s2">&quot;websocket&quot;</span><span class="p">:</span> <span class="n">websocket_endpoint</span>
-<span class="p">})</span>
-</pre></div>
                 
                   
                 

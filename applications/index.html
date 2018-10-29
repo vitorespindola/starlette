@@ -284,6 +284,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-event-handlers-to-the-application" title="Adding event handlers to the application" class="md-nav__link">
+    Adding event handlers to the application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#submounting-other-applications" title="Submounting other applications" class="md-nav__link">
     Submounting other applications
   </a>
@@ -464,6 +471,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -492,6 +511,13 @@
         <li class="md-nav__item">
   <a href="#adding-routes-to-the-application" title="Adding routes to the application" class="md-nav__link">
     Adding routes to the application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-event-handlers-to-the-application" title="Adding event handlers to the application" class="md-nav__link">
+    Adding event handlers to the application
   </a>
   
 </li>
@@ -547,7 +573,8 @@ its other functionality.</p>
 
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/user/{username}&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path_params</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
 
 
@@ -573,9 +600,17 @@ its other functionality.</p>
 <ul>
 <li><code>app.add_route(path, func, methods=["GET"])</code> - Add an HTTP route. The function may be either a coroutine or a regular function, with a signature like <code>func(request, **kwargs) -&gt; response</code>.</li>
 <li><code>app.add_websocket_route(path, func)</code> - Add a websocket session route. The function must be a coroutine, with a signature like <code>func(session, **kwargs)</code>.</li>
+<li><code>app.add_graphql_route(path, schema, executor=None)</code> - Add a GraphQL route.</li>
 <li><code>@app.route(path)</code> - Add an HTTP route, decorator style.</li>
 <li><code>@app.websocket_route(path)</code> - Add a WebSocket route, decorator style.</li>
 </ul>
+<h3 id="adding-event-handlers-to-the-application">Adding event handlers to the application</h3>
+<p>There are two ways to add event handlers:</p>
+<ul>
+<li><code>@app.on_event(event_type)</code> - Add an event, decorator style</li>
+<li><code>app.add_event_handler(event_type, func)</code> - Add an event through a function call.</li>
+</ul>
+<p><code>event_type</code> must be specified as either <code>'startup'</code> or <code>'shutdown'</code>.</p>
 <h3 id="submounting-other-applications">Submounting other applications</h3>
 <p>Submounting applications is a powerful way to include reusable ASGI applications.</p>
 <ul>

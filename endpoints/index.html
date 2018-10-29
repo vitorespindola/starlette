@@ -450,6 +450,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -535,7 +547,8 @@ than to an instance of the class:</p>
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/{username}&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">HTTPEndpoint</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path_params</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, {username}&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -565,7 +578,7 @@ has an attribute <code>encoding</code> which may optionally be set, in order to 
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">WebSocketEndpoint</span><span class="p">):</span>
     <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;bytes&#39;</span>
 
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">):</span>
         <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
     <span class="n">async</span> <span class="k">def</span> <span class="nf">on_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>

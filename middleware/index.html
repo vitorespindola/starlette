@@ -491,6 +491,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -594,9 +606,9 @@ in a way that ensures that it remains wrapped by the exception handler.</p>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
 
-<span class="c1"># Ensure that all requests include an &#39;example.com&#39; host header,</span>
+<span class="c1"># Ensure that all requests include an &#39;example.com&#39; or &#39;*.example.com&#39; host header,</span>
 <span class="c1"># and strictly enforce https-only access.</span>
-<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;*.example.com&#39;</span><span class="p">])</span>
 <span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">HTTPSRedirectMiddleware</span><span class="p">)</span>
 </pre></div>
 
@@ -655,13 +667,15 @@ to guard against HTTP Host Header attacks.</p>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;*.example.com&#39;</span><span class="p">])</span>
 </pre></div>
 
 
 <p>The following arguments are supported:</p>
 <ul>
-<li><code>allowed_hosts</code> - A list of domain names that should be allowed as hostnames.</li>
+<li><code>allowed_hosts</code> - A list of domain names that should be allowed as hostnames. Wildcard
+domains such as <code>*.example.com</code> are supported for matching subdomains. To allow any
+hostname either use <code>allowed_hosts=["*"]</code> or omit the middleware.</li>
 </ul>
 <p>If an incoming request does not validate correctly then a 400 response will be sent.</p>
 <h2 id="gzipmiddleware">GZipMiddleware</h2>
