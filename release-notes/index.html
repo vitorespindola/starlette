@@ -92,7 +92,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#062" tabindex="1" class="md-skip">
+      <a href="../#063" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -438,6 +438,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#063" title="0.6.3" class="md-nav__link">
+    0.6.3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#062" title="0.6.2" class="md-nav__link">
     0.6.2
   </a>
@@ -555,6 +562,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#063" title="0.6.3" class="md-nav__link">
+    0.6.3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#062" title="0.6.2" class="md-nav__link">
     0.6.2
   </a>
@@ -661,7 +675,15 @@
                 
                   <h1>Release Notes</h1>
                 
-                <h2 id="062">0.6.2</h2>
+                <h2 id="063">0.6.3</h2>
+<ul>
+<li>Support routing to methods.</li>
+<li>Ensure url_path_for works with Mount('/{some_path_params}').</li>
+<li>Fix Router(default=) argument.</li>
+<li>Support repeated paths, like: @app.route("/", methods=["GET"]), @app.route("/", methods=["POST"])</li>
+<li>Use the default ThreadPoolExecutor for all sync endpoints.</li>
+</ul>
+<h2 id="062">0.6.2</h2>
 <h3 id="sessionmiddleware">SessionMiddleware</h3>
 <p>Added support for <code>request.session</code>, with <code>SessionMiddleware</code>.</p>
 <h2 id="061">0.6.1</h2>
