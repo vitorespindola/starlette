@@ -656,12 +656,12 @@ which is ideal for building high performance asyncio services.</p>
 <h2 id="dependencies">Dependencies</h2>
 <p>Starlette does not have any hard dependencies, but the following are optional:</p>
 <ul>
-<li><code>[requests][requests]</code> - Required if you want to use the <code>TestClient</code>.</li>
-<li><code>[aiofiles][aiofiles]</code> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
-<li><code>[python-multipart][python-multipart]</code> - Required if you want to support form parsing, with <code>request.form()</code>.</li>
-<li><code>[graphene][graphene]</code> - Required for GraphQL support.</li>
-<li><code>[itsdangerous][itsdangerous]</code> - Required for SessionMiddleware support.</li>
-<li><code>[ujson][ujson]</code> - Required if you want to use <code>UJSONResponse</code>.</li>
+<li><a href="http://docs.python-requests.org/en/master/"><code>requests</code></a> - Required if you want to use the <code>TestClient</code>.</li>
+<li><a href="https://github.com/Tinche/aiofiles"><code>aiofiles</code></a> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
+<li><a href="https://andrew-d.github.io/python-multipart/"><code>python-multipart</code></a> - Required if you want to support form parsing, with <code>request.form()</code>.</li>
+<li><a href="https://graphene-python.org/"><code>graphene</code></a> - Required for GraphQL support.</li>
+<li><a href="https://pythonhosted.org/itsdangerous/"><code>itsdangerous</code></a> - Required for SessionMiddleware support.</li>
+<li><a href="https://github.com/esnme/ultrajson"><code>ujson</code></a> - Required if you want to use <code>UJSONResponse</code>.</li>
 </ul>
 <p>You can install all of these with <code>pip3 install starlette[full]</code>.</p>
 <h2 id="framework-or-toolkit">Framework or Toolkit</h2>
