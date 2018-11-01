@@ -375,18 +375,6 @@
 
 
   <li class="md-nav__item">
-    <a href="graphql/" title="GraphQL" class="md-nav__link">
-      GraphQL
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="routing/" title="Routing" class="md-nav__link">
       Routing
     </a>
@@ -425,6 +413,30 @@
   <li class="md-nav__item">
     <a href="staticfiles/" title="Static Files" class="md-nav__link">
       Static Files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="graphql/" title="GraphQL" class="md-nav__link">
+      GraphQL
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="schemas/" title="API Schemas" class="md-nav__link">
+      API Schemas
     </a>
   </li>
 
@@ -659,8 +671,9 @@ which is ideal for building high performance asyncio services.</p>
 <li><a href="http://docs.python-requests.org/en/master/"><code>requests</code></a> - Required if you want to use the <code>TestClient</code>.</li>
 <li><a href="https://github.com/Tinche/aiofiles"><code>aiofiles</code></a> - Required if you want to use <code>FileResponse</code> or <code>StaticFiles</code>.</li>
 <li><a href="https://andrew-d.github.io/python-multipart/"><code>python-multipart</code></a> - Required if you want to support form parsing, with <code>request.form()</code>.</li>
-<li><a href="https://graphene-python.org/"><code>graphene</code></a> - Required for GraphQL support.</li>
-<li><a href="https://pythonhosted.org/itsdangerous/"><code>itsdangerous</code></a> - Required for SessionMiddleware support.</li>
+<li><a href="https://graphene-python.org/"><code>graphene</code></a> - Required for <code>GraphQLApp</code> support.</li>
+<li><a href="https://pythonhosted.org/itsdangerous/"><code>itsdangerous</code></a> - Required for <code>SessionMiddleware</code> support.</li>
+<li><a href="https://pyyaml.org/wiki/PyYAMLDocumentation"><code>pyyaml</code></a> - Required for <code>SchemaGenerator</code> support.</li>
 <li><a href="https://github.com/esnme/ultrajson"><code>ujson</code></a> - Required if you want to use <code>UJSONResponse</code>.</li>
 </ul>
 <p>You can install all of these with <code>pip3 install starlette[full]</code>.</p>

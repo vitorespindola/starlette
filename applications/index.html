@@ -357,18 +357,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../graphql/" title="GraphQL" class="md-nav__link">
-      GraphQL
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../routing/" title="Routing" class="md-nav__link">
       Routing
     </a>
@@ -407,6 +395,30 @@
   <li class="md-nav__item">
     <a href="../staticfiles/" title="Static Files" class="md-nav__link">
       Static Files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../graphql/" title="GraphQL" class="md-nav__link">
+      GraphQL
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schemas/" title="API Schemas" class="md-nav__link">
+      API Schemas
     </a>
   </li>
 
@@ -600,7 +612,6 @@ its other functionality.</p>
 <ul>
 <li><code>app.add_route(path, func, methods=["GET"])</code> - Add an HTTP route. The function may be either a coroutine or a regular function, with a signature like <code>func(request, **kwargs) -&gt; response</code>.</li>
 <li><code>app.add_websocket_route(path, func)</code> - Add a websocket session route. The function must be a coroutine, with a signature like <code>func(session, **kwargs)</code>.</li>
-<li><code>app.add_graphql_route(path, schema, executor=None)</code> - Add a GraphQL route.</li>
 <li><code>@app.route(path)</code> - Add an HTTP route, decorator style.</li>
 <li><code>@app.websocket_route(path)</code> - Add a WebSocket route, decorator style.</li>
 </ul>
