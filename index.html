@@ -707,18 +707,34 @@ an ecosystem of shared middleware and mountable applications.</p>
 <p>The clean API separation also means it's easier to understand each component
 in isolation.</p>
 <h2 id="performance">Performance</h2>
-<p>Our testing shows that Starlette applications running under Uvicorn as one of
-the fastest Python frameworks available. As an example, application performance
-should roughly equal or out-perform Sanic.</p>
+<p>Independent TechEmpower benchmarks show Starlette applications running under Uvicorn
+as <a href="https://www.techempower.com/benchmarks/#section=test&amp;runid=14a815b6-93c1-4207-96bb-3960c29719e2&amp;hw=ph&amp;test=fortune&amp;l=zijw1r-1&amp;d=e3">one of the fastest Python frameworks available</a>. <em>(*)</em></p>
 <p>For high throughput loads you should:</p>
 <ul>
 <li>Make sure to install <code>ujson</code> and use <code>UJSONResponse</code>.</li>
-<li>Run using <code>uvicorn</code>, with access logging disabled.</li>
+<li>Run using Gunicorn using the <code>uvicorn</code> worker class.</li>
+<li>Use one or two workers per-CPU core. (You might need to experiment with this.)</li>
+<li>Disable access logging.</li>
 </ul>
+<p>For example:</p>
+<div class="codehilite"><pre><span></span>gunicorn -w <span class="m">4</span> -k uvicorn.workers.UvicornWorker --log-level warning example:app
+</pre></div>
+
+
 <p>Several of the ASGI servers also have pure Python implementations available,
 so you can also run under <code>PyPy</code> if your application code has parts that are
 CPU constrained.</p>
-<p>Eg. <code>uvicorn.run(..., http='h11', loop='asyncio')</code></p>
+<p>Either programatically:</p>
+<div class="codehilite"><pre><span></span><span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">http</span><span class="o">=</span><span class="s1">&#39;h11&#39;</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="s1">&#39;asyncio&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Or using Gunicorn:</p>
+<div class="codehilite"><pre><span></span>gunicorn -k uvicorn.workers.UvicornH11Worker ...
+</pre></div>
+
+
+<p><em>(*) TechEmpower <a href="https://tfb-status.techempower.com/">continuous benchmarking results</a>, from 13th Sept 2018. Filtered to JavaScript, Python, and Ruby frameworks backed by Postgres, for comparision against similar candidates. To be updated to Round 17 once available.</em></p>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 
 <p align="center"><i>Starlette is <a href="https://github.com/tomchristie/starlette/blob/master/LICENSE.md">BSD licensed</a> code. Designed & built in Brighton, England.</i></p>
