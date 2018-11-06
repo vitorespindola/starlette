@@ -397,16 +397,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-asgi-middleware-without-starlette" title="Using ASGI middleware without Starlette" class="md-nav__link">
-    Using ASGI middleware without Starlette
+  <a href="#basehttpmiddleware" title="BaseHTTPMiddleware" class="md-nav__link">
+    BaseHTTPMiddleware
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#basehttpmiddleware" title="BaseHTTPMiddleware" class="md-nav__link">
-    BaseHTTPMiddleware
+  <a href="#using-middleware-in-other-frameworks" title="Using middleware in other frameworks" class="md-nav__link">
+    Using middleware in other frameworks
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-middleware" title="Third party middleware" class="md-nav__link">
+    Third party middleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentrymiddleware" title="SentryMiddleware" class="md-nav__link">
+    SentryMiddleware
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxyheadersmiddleware" title="ProxyHeadersMiddleware" class="md-nav__link">
+    ProxyHeadersMiddleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -429,6 +456,18 @@
   <li class="md-nav__item">
     <a href="../staticfiles/" title="Static Files" class="md-nav__link">
       Static Files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../templates/" title="Templates" class="md-nav__link">
+      Templates
     </a>
   </li>
 
@@ -603,16 +642,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-asgi-middleware-without-starlette" title="Using ASGI middleware without Starlette" class="md-nav__link">
-    Using ASGI middleware without Starlette
+  <a href="#basehttpmiddleware" title="BaseHTTPMiddleware" class="md-nav__link">
+    BaseHTTPMiddleware
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#basehttpmiddleware" title="BaseHTTPMiddleware" class="md-nav__link">
-    BaseHTTPMiddleware
+  <a href="#using-middleware-in-other-frameworks" title="Using middleware in other frameworks" class="md-nav__link">
+    Using middleware in other frameworks
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-middleware" title="Third party middleware" class="md-nav__link">
+    Third party middleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentrymiddleware" title="SentryMiddleware" class="md-nav__link">
+    SentryMiddleware
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxyheadersmiddleware" title="ProxyHeadersMiddleware" class="md-nav__link">
+    ProxyHeadersMiddleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -751,17 +817,6 @@ hostname either use <code>allowed_hosts=["*"]</code> or omit the middleware.</li
 <ul>
 <li><code>minimum_size</code> - Do not GZip responses that are smaller than this minimum size in bytes. Defaults to <code>500</code>.</li>
 </ul>
-<h2 id="using-asgi-middleware-without-starlette">Using ASGI middleware without Starlette</h2>
-<p>To wrap ASGI middleware around other ASGI applications, you should use the
-more general pattern of wrapping the application instance:</p>
-<div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">TrustedHostMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
-</pre></div>
-
-
-<p>You can do this with a Starlette application instance too, but it is preferable
-to use <code>.add_middleware</code>, as it'll ensure that you don't lose the reference
-to the application object, and that the exception handling always wraps around
-any other behaviour.</p>
 <h2 id="basehttpmiddleware">BaseHTTPMiddleware</h2>
 <p>An abstract class that allows you to write ASGI middleware against a request/response
 interface, rather than dealing with ASGI messages directly.</p>
@@ -802,6 +857,23 @@ attribute on the class if you do this.</p>
 <p>Middleware classes should not modify their state outside of the <code>__init__</code> method.
 Instead you should keep any state local to the <code>dispatch</code> method, or pass it
 around explicitly, rather than mutating the middleware instance.</p>
+<h2 id="using-middleware-in-other-frameworks">Using middleware in other frameworks</h2>
+<p>To wrap ASGI middleware around other ASGI applications, you should use the
+more general pattern of wrapping the application instance:</p>
+<div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">TrustedHostMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>You can do this with a Starlette application instance too, but it is preferable
+to use <code>.add_middleware</code>, as it'll ensure that you don't lose the reference
+to the application object, and that the exception handling always wraps around
+any other behaviour.</p>
+<h2 id="third-party-middleware">Third party middleware</h2>
+<h4 id="sentrymiddleware"><a href="https://github.com/encode/sentry-asgi">SentryMiddleware</a></h4>
+<p>A middleware class for logging exceptions to <a href="https://sentry.io/">Sentry</a>.</p>
+<h4 id="proxyheadersmiddleware"><a href="https://github.com/encode/uvicorn/blob/master/uvicorn/middleware/proxy_headers.py">ProxyHeadersMiddleware</a></h4>
+<p>Uvicorn includes a middleware class for determining the client IP address,
+when proxy servers are being used, based on the <code>X-Forwarded-Proto</code> and <code>X-Forwarded-For</code> headers. For more complex proxy configurations, you might want to adapt this middleware.</p>
                 
                   
                 

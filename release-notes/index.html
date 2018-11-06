@@ -92,7 +92,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#072" tabindex="1" class="md-skip">
+      <a href="#073" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -343,6 +343,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../graphql/" title="GraphQL" class="md-nav__link">
       GraphQL
     </a>
@@ -450,6 +462,26 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#073" title="0.7.3" class="md-nav__link">
+    0.7.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routing" title="Routing" class="md-nav__link">
+    Routing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#072" title="0.7.2" class="md-nav__link">
     0.7.2
   </a>
@@ -465,7 +497,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#routing" title="Routing" class="md-nav__link">
+  <a href="#routing_1" title="Routing" class="md-nav__link">
     Routing
   </a>
   
@@ -675,6 +707,26 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#073" title="0.7.3" class="md-nav__link">
+    0.7.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routing" title="Routing" class="md-nav__link">
+    Routing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#072" title="0.7.2" class="md-nav__link">
     0.7.2
   </a>
@@ -690,7 +742,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#routing" title="Routing" class="md-nav__link">
+  <a href="#routing_1" title="Routing" class="md-nav__link">
     Routing
   </a>
   
@@ -889,12 +941,17 @@
                 
                   <h1>Release Notes</h1>
                 
-                <h2 id="072">0.7.2</h2>
+                <h2 id="073">0.7.3</h2>
+<h3 id="routing">Routing</h3>
+<ul>
+<li>Add <code>name=</code> support to <code>app.mount()</code>. This allows eg: <code>app.mount('/static', StaticFiles(directory='static'), name='static')</code>.</li>
+</ul>
+<h2 id="072">0.7.2</h2>
 <h3 id="middleware">Middleware</h3>
 <ul>
 <li>Add support for <code>@app.middleware("http")</code> decorator.</li>
 </ul>
-<h3 id="routing">Routing</h3>
+<h3 id="routing_1">Routing</h3>
 <ul>
 <li>Add "endpoint" to ASGI scope.</li>
 </ul>
