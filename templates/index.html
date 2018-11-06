@@ -564,6 +564,11 @@ a Jinja2 environment together with Starlette.</p>
 inside our templates. We always need to pass the incoming <code>request</code> instance
 in our context in order to be able to use the <code>url_for</code> function.</li>
 </ul>
+<p>We can now link to static files from within our HTML templates. For example:</p>
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, path=&#39;/css/bootstrap.min.css&#39;) }}&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+</pre></div>
+
+
 <h2 id="asynchronous-template-rendering">Asynchronous template rendering</h2>
 <p>Jinja2 supports async template rendering, however as a general rule
 we'd recommend that you keep your templates free from logic that invokes
