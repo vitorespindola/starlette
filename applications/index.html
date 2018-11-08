@@ -477,18 +477,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../debug/" title="Debug" class="md-nav__link">
-      Debug
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../testclient/" title="Test Client" class="md-nav__link">
       Test Client
     </a>
@@ -643,8 +631,8 @@ its other functionality.</p>
 <p>You can use either of the following to catch and handle particular types of
 exceptions that occur within the application:</p>
 <ul>
-<li><code>app.add_exception_handler(exc_class, handler)</code> - Add an error handler. The handler function may be either a coroutine or a regular function, with a signature like <code>func(request, exc) -&gt; response</code>.</li>
-<li><code>@app.exception_handler(exc_class)</code> - Add an error handler, decorator style.</li>
+<li><code>app.add_exception_handler(exc_class_or_status_code, handler)</code> - Add an error handler. The handler function may be either a coroutine or a regular function, with a signature like <code>func(request, exc) -&gt; response</code>.</li>
+<li><code>@app.exception_handler(exc_class_or_status_code)</code> - Add an error handler, decorator style.</li>
 <li><code>app.debug</code> - Enable or disable error tracebacks in the browser.</li>
 </ul>
                 
