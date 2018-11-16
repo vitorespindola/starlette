@@ -555,7 +555,7 @@ make sure to setup Graphene's AsyncioExecutor using the <code>executor</code> ar
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
 
 <span class="c1"># We&#39;re using `executor=AsyncioExecutor()` here.</span>
-<span class="n">app</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">GraphQLApp</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">graphene</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">,</span> <span class="n">executor</span><span class="o">=</span><span class="n">AsyncioExecutor</span><span class="p">())))</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">GraphQLApp</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">graphene</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">),</span> <span class="n">executor</span><span class="o">=</span><span class="n">AsyncioExecutor</span><span class="p">()))</span>
 </pre></div>
                 
                   

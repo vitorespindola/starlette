@@ -469,6 +469,11 @@ dispatches incoming requests to endpoints or submounted applications.</p>
 </pre></div>
 
 
+<p>Convertors for <code>int</code>, <code>float</code>, and <code>path</code> are also available:</p>
+<div class="codehilite"><pre><span></span><span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/users/{user_id:int}&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+</pre></div>
+
+
 <p>Path parameters are made available in the request, as the <code>request.path_params</code>
 dictionary.</p>
 <p>Because the target of a <code>Mount</code> is an ASGI instance itself, routers
