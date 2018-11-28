@@ -93,6 +93,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#third-party-packages" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -370,9 +374,49 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        API Schemas
+      </label>
+    
     <a href="./" title="API Schemas" class="md-nav__link md-nav__link--active">
       API Schemas
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-packages" title="Third party packages" class="md-nav__link">
+    Third party packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starlette-apispec" title="starlette-apispec" class="md-nav__link">
+    starlette-apispec
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -443,6 +487,48 @@
                 </div>
               </div>
             
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-packages" title="Third party packages" class="md-nav__link">
+    Third party packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starlette-apispec" title="starlette-apispec" class="md-nav__link">
+    starlette-apispec
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
             
           
           <div class="md-content">
@@ -535,6 +621,11 @@ use tooling such as generating API documentation.</p>
     <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">arvg</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;schema&quot;</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
 </pre></div>
+
+
+<h3 id="third-party-packages">Third party packages</h3>
+<h4 id="starlette-apispec"><a href="starlette-apispec">starlette-apispec</a></h4>
+<p>Easy APISpec integration for Starlette, which supports some object serialization libraries.</p>
                 
                   
                 
