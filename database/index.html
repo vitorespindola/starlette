@@ -625,45 +625,36 @@ context manager, or as a low-level API.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.databases</span> <span class="kn">import</span> <span class="n">transaction</span>
 
 <span class="nd">@transaction</span>
-<span class="n">async</span> <span class="k">def</span> <span class="nf">populate_notes</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="c1"># These database inserts occur within a transaction.</span>
-    <span class="c1"># If an error occurs they will be rolled back as a group.</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;buy the groceries&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># This database insert occurs within a transaction.</span>
+    <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;take the dog for a walk&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;interview preparation&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
 </pre></div>
 
 
 <p>Using a context manager:</p>
-<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">populate_notes</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">async</span> <span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
-        <span class="c1"># These database inserts occur within a transaction.</span>
-        <span class="c1"># If an error occurs they will be rolled back as a group.</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;buy the groceries&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c1"># This database insert occurs within a transaction.</span>
+        <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;take the dog for a walk&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;interview preparation&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
 </pre></div>
 
 
 <p>Using the low-level API:</p>
-<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">populate_notes</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">transaction</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span>
     <span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># These database inserts occur within a transaction.</span>
-        <span class="c1"># If an error occurs they will be rolled back as a group.</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;buy the groceries&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c1"># This database insert occurs within a transaction.</span>
+        <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;take the dog for a walk&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;interview preparation&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">transaction</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
         <span class="k">raise</span>
