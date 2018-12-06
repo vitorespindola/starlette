@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.1.0">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.11e41852.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.20ef595d.js"></script>
     
     
       
@@ -57,6 +57,7 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
     
     
   </head>
@@ -586,6 +587,7 @@ that is not committed to source control.</p>
 <span class="kn">from</span> <span class="nn">starlette.config</span> <span class="kn">import</span> <span class="n">Config</span>
 <span class="kn">from</span> <span class="nn">starlette.datastructures</span> <span class="kn">import</span> <span class="n">DatabaseURL</span><span class="p">,</span> <span class="n">Secret</span>
 
+<span class="c1"># Config will be read from environment variables and/or &quot;.env&quot; files.</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s2">&quot;.env&quot;</span><span class="p">)</span>
 
 <span class="n">DEBUG</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -634,7 +636,7 @@ in their representations.</p>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>
 <span class="n">DatabaseURL</span><span class="p">(</span><span class="s1">&#39;postgresql://admin:**********@192.168.0.8/my-application&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">SECRET_KEY</span><span class="p">)</span>
-<span class="s1">&#39;98n349$%8b8-7yjn0n8y93T$23r&#39;</span>
+<span class="s1">&#39;postgresql://admin:Fkjh348htGee4t3@192.168.0.8/my-application&#39;</span>
 </pre></div>
 
 
@@ -740,12 +742,13 @@ and drop it once the tests complete. We'd also like to ensure</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a clean test database every time the tests are run.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">database_exists</span><span class="p">(</span><span class="n">engine</span><span class="o">.</span><span class="n">url</span><span class="p">),</span> <span class="s1">&#39;Test database already exists. Aborting tests.&#39;</span>
-    <span class="n">create_database</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>  <span class="c1"># Create the test database.</span>
-    <span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>             <span class="c1"># Create the tables.</span>
-    <span class="k">yield</span>                                   <span class="c1"># Run the tests.</span>
-    <span class="n">drop_database</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>    <span class="c1"># Drop the test database.</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">database_exists</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="s1">&#39;Test database already exists. Aborting tests.&#39;</span>
+    <span class="n">create_database</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>             <span class="c1"># Create the test database.</span>
+    <span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>      <span class="c1"># Create the tables.</span>
+    <span class="k">yield</span>                            <span class="c1"># Run the tests.</span>
+    <span class="n">drop_database</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>               <span class="c1"># Drop the test database.</span>
 
 
 <span class="nd">@pytest.fixture</span><span class="p">()</span>
@@ -758,7 +761,7 @@ and drop it once the tests complete. We'd also like to ensure</p>
     <span class="c1">#</span>
     <span class="c1"># Because we&#39;ve configured the DatabaseMiddleware with `rollback_on_shutdown`</span>
     <span class="c1"># we&#39;ll get a complete rollback to the initial state after each test case runs.</span>
-    <span class="n">async</span> <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_client</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">test_client</span>
 </pre></div>
                 
@@ -832,7 +835,7 @@ and drop it once the tests complete. We'd also like to ensure</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.5e60981f.js"></script>
+      <script src="../assets/javascripts/application.9e1f3b71.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
