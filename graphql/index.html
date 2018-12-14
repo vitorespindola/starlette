@@ -398,6 +398,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-background-tasks" title="Adding background tasks" class="md-nav__link">
+    Adding background tasks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sync-or-async-executors" title="Sync or Async executors" class="md-nav__link">
     Sync or Async executors
   </a>
@@ -537,6 +544,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-background-tasks" title="Adding background tasks" class="md-nav__link">
+    Adding background tasks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sync-or-async-executors" title="Sync or Async executors" class="md-nav__link">
     Sync or Async executors
   </a>
@@ -595,6 +609,25 @@ which you can use to interact with your GraphQL API.</p>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;request&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;unknown&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="adding-background-tasks">Adding background tasks</h2>
+<p>You can add background tasks to run once the response has been sent.</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="n">graphene</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">):</span>
+    <span class="n">user_agent</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">resolve_user_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the User-Agent of the incoming request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">user_agent</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;unknown&gt;&quot;</span><span class="p">)</span>
+        <span class="n">background</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;background&quot;</span><span class="p">]</span>
+        <span class="n">background</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">log_user_agent</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">user_agent</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">log_user_agent</span><span class="p">(</span><span class="n">user_agent</span><span class="p">):</span>
+    <span class="o">...</span>
 </pre></div>
 
 

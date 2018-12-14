@@ -581,9 +581,10 @@ and permissions. Once you've installed <code>AuthenticationMiddleware</code> wit
 appropriate authentication backend the <code>request.user</code> and <code>request.auth</code>
 interfaces will be available in your endpoints.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.authentication</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">AuthenticationBackend</span><span class="p">,</span> <span class="n">AuthenticationError</span><span class="p">,</span> <span class="n">SimpleUser</span><span class="p">,</span> <span class="n">UnauthenticatedUser</span>
+    <span class="n">AuthenticationBackend</span><span class="p">,</span> <span class="n">AuthenticationError</span><span class="p">,</span> <span class="n">SimpleUser</span><span class="p">,</span> <span class="n">UnauthenticatedUser</span><span class="p">,</span>
+    <span class="n">AuthCredentials</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">starlette.middleware</span> <span class="kn">import</span> <span class="n">AuthenticationMiddleware</span>
+<span class="kn">from</span> <span class="nn">starlette.middleware.authentication</span> <span class="kn">import</span> <span class="n">AuthenticationMiddleware</span>
 <span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
 <span class="kn">import</span> <span class="nn">base64</span>
 <span class="kn">import</span> <span class="nn">binascii</span>
@@ -600,7 +601,7 @@ interfaces will be available in your endpoints.</p>
             <span class="k">if</span> <span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;basic&#39;</span><span class="p">:</span>
                 <span class="k">return</span>
             <span class="n">decoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">,</span> <span class="n">binascii</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">,</span> <span class="n">binascii</span><span class="o">.</span><span class="n">Error</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="s1">&#39;Invalid basic auth credentials&#39;</span><span class="p">)</span>
 
         <span class="n">username</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">decoded</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -611,7 +612,7 @@ interfaces will be available in your endpoints.</p>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">AuthenticationMiddleware</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">BasicAuthBackend</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">AuthenticationMiddleware</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">BasicAuthBackend</span><span class="p">())</span>
 
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>

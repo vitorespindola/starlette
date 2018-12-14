@@ -326,6 +326,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#client-address" title="Client Address" class="md-nav__link">
+    Client Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cookies" title="Cookies" class="md-nav__link">
     Cookies
   </a>
@@ -621,6 +628,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#client-address" title="Client Address" class="md-nav__link">
+    Client Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cookies" title="Cookies" class="md-nav__link">
     Cookies
   </a>
@@ -699,6 +713,11 @@ components that can be parsed out of the URL.</p>
 <h4 id="path-parameters">Path Parameters</h4>
 <p>Router path parameters are exposed as a dictionary interface.</p>
 <p>For example: <code>request.path_params['username']</code></p>
+<h4 id="client-address">Client Address</h4>
+<p>The client's remote address is exposed as a named two-tuple <code>request.client</code>.
+Either item in the tuple may be <code>None</code>.</p>
+<p>The hostname or IP address: <code>request.client.host</code></p>
+<p>The port number from which the client is connecting: <code>request.client.port</code></p>
 <h4 id="cookies">Cookies</h4>
 <p>Cookies are exposed as a regular dictionary interface.</p>
 <p>For example: <code>request.cookies.get('mycookie')</code></p>
