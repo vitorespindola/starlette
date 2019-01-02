@@ -423,6 +423,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#custom-authentication-error-responses" title="Custom authentication error responses" class="md-nav__link">
+    Custom authentication error responses
+  </a>
+  
+</li>
+      
       
       
       
@@ -512,6 +519,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../third-party-packages/" title="Third Party Packages" class="md-nav__link">
+      Third Party Packages
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../release-notes/" title="Release Notes" class="md-nav__link">
       Release Notes
     </a>
@@ -553,6 +572,13 @@
         <li class="md-nav__item">
   <a href="#permissions" title="Permissions" class="md-nav__link">
     Permissions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-authentication-error-responses" title="Custom authentication error responses" class="md-nav__link">
+    Custom authentication error responses
   </a>
   
 </li>
@@ -694,6 +720,16 @@ page.</p>
 <span class="nd">@requires</span><span class="p">(</span><span class="s1">&#39;authenticated&#39;</span><span class="p">,</span> <span class="n">redirect</span><span class="o">=</span><span class="s1">&#39;homepage&#39;</span><span class="p">)</span>
 <span class="n">async</span> <span class="k">def</span> <span class="nf">dashboard</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="o">...</span>
+</pre></div>
+
+
+<h2 id="custom-authentication-error-responses">Custom authentication error responses</h2>
+<p>You can customise the error response sent when a <code>AuthenticationError</code> is 
+raised by an auth backend:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">on_auth_error</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)},</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">AuthenticationMiddleware</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">BasicAuthBackend</span><span class="p">(),</span> <span class="n">on_error</span><span class="o">=</span><span class="n">on_auth_error</span><span class="p">)</span>
 </pre></div>
                 
                   

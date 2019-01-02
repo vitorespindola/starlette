@@ -467,6 +467,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../third-party-packages/" title="Third Party Packages" class="md-nav__link">
+      Third Party Packages
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../release-notes/" title="Release Notes" class="md-nav__link">
       Release Notes
     </a>
@@ -527,6 +539,20 @@ allow for easy composition. For example:</p>
 
 <p>The router will respond with "404 Not found" or "405 Method not allowed"
 responses for requests which do not match.</p>
+<p>Incoming paths are matched against each <code>Route</code> in order.</p>
+<p>If you need to have a <code>Route</code> with a fixed path that would also match a
+<code>Route</code> with parameters you should add the <code>Route</code> with the fixed path first.</p>
+<p>For example, with an additional <code>Route</code> like:</p>
+<div class="codehilite"><pre><span></span><span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/users/me&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">UserMe</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>You should add that route for <code>/users/me</code> before the one for <code>/users/{username}</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/users/me&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">UserMe</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/{username}&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">]),</span>
+<span class="p">])</span>
+</pre></div>
                 
                   
                 
