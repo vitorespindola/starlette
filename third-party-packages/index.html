@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.1.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.11e41852.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.20ef595d.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -57,7 +57,6 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
     
     
   </head>
@@ -508,6 +507,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#webargs-starlette" title="webargs-starlette" class="md-nav__link">
+    webargs-starlette
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -603,6 +609,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#webargs-starlette" title="webargs-starlette" class="md-nav__link">
+    webargs-starlette
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -670,6 +683,36 @@
 <li><strong>Components</strong> as the base of the plugin ecosystem, allowing you to create custom or use those already defined in your endpoints, injected as parameters.</li>
 <li><strong>Starlette ASGI</strong> objects like <code>Request</code>, <code>Response</code>, <code>Session</code> and so on are defined as components and ready to be injected in your endpoints.</li>
 </ul>
+<h3 id="webargs-starlette">webargs-starlette</h3>
+<p>Link: <a href="https://github.com/sloria/webargs-starlette" target="_blank">https://github.com/sloria/webargs-starlette</a></p>
+<p>Declarative request parsing and validation for Starlette, built on top
+of <a href="https://github.com/marshmallow-code/webargs">webargs</a>.</p>
+<p>Allows you to parse querystring, JSON, form, headers, and cookies using
+type annotations.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">uvicorn</span>
+<span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+<span class="kn">from</span> <span class="nn">webargs_starlette</span> <span class="kn">import</span> <span class="n">use_annotations</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="nd">@use_annotations</span><span class="p">(</span><span class="n">locations</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">,))</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;World&quot;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+
+<span class="c1"># curl &#39;http://localhost:5000/&#39;</span>
+<span class="c1"># {&quot;Hello&quot;: &quot;World&quot;}</span>
+<span class="c1"># curl &#39;http://localhost:5000/?name=Ada&#39;</span>
+<span class="c1"># {&quot;Hello&quot;: &quot;Ada&quot;}</span>
+</pre></div>
+
+
 <h2 id="frameworks">Frameworks</h2>
 <h3 id="responder">Responder</h3>
 <p>Link: <a href="https://github.com/kennethreitz/responder" target="_blank">https://github.com/kennethreitz/responder</a></p>
@@ -794,7 +837,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.9e1f3b71.js"></script>
+      <script src="../assets/javascripts/application.5e60981f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
