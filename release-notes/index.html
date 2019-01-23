@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.572ca0f0.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.8c900955.js"></script>
     
     
       
@@ -57,6 +57,7 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
     
     
   </head>
@@ -92,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#0910" tabindex="1" class="md-skip">
+      <a href="#0911" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -496,6 +497,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0911" title="0.9.11" class="md-nav__link">
+    0.9.11
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#0910" title="0.9.10" class="md-nav__link">
@@ -951,6 +959,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0911" title="0.9.11" class="md-nav__link">
+    0.9.11
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0910" title="0.9.10" class="md-nav__link">
     0.9.10
   </a>
@@ -1393,7 +1408,15 @@
                 
                   <h1>Release Notes</h1>
                 
-                <h2 id="0910">0.9.10</h2>
+                <h2 id="0911">0.9.11</h2>
+<ul>
+<li>Session cookies now include browser 'expires', in addition to the existing signed expiry.</li>
+<li><code>request.form()</code> now returns a multi-dict interface.</li>
+<li>The query parameter multi-dict implementation now mirrors <code>dict</code> more correctly for the
+behavior of <code>.keys()</code>, <code>.values()</code>, and <code>.items()</code> when multiple same-key items occur.</li>
+<li>Use <code>urlsplit</code> throughout in favor of <code>urlparse</code>.</li>
+</ul>
+<h2 id="0910">0.9.10</h2>
 <ul>
 <li>Support <code>@requires(...)</code> on class methods.</li>
 <li>Apply URL escaping to form data.</li>
@@ -1684,7 +1707,7 @@ The URL instance is a string-like object, and will return only the path if coerc
       
     </div>
     
-      <script src="../assets/javascripts/application.5e60981f.js"></script>
+      <script src="../assets/javascripts/application.b41f3d20.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
