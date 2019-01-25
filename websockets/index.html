@@ -2,7 +2,7 @@
 
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.572ca0f0.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.8c900955.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -57,7 +57,6 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
     
     
   </head>
@@ -707,6 +706,7 @@ to the HTTP request, but that allows sending and receiving data on a websocket.<
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">scope</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;websocket&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
 
     <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
@@ -744,6 +744,8 @@ components that can be parsed out of the URL.</p>
 <li><code>await websocket.send_bytes(data)</code></li>
 <li><code>await websocket.send_json(data)</code></li>
 </ul>
+<p>JSON messages default to being sent over text data frames, from version 0.10.0 onwards.
+Use <code>websocket.send_json(data, mode="binary")</code> to send JSON over binary data frames.</p>
 <h3 id="receiving-data">Receiving data</h3>
 <ul>
 <li><code>await websocket.receive_text()</code></li>
@@ -751,6 +753,8 @@ components that can be parsed out of the URL.</p>
 <li><code>await websocket.receive_json()</code></li>
 </ul>
 <p>May raise <code>starlette.websockets.Disconnect()</code>.</p>
+<p>JSON messages default to being received over text data frames, from version 0.10.0 onwards.
+Use <code>websocket.receive_json(data, mode="binary")</code> to receive JSON over binary data frames.</p>
 <h3 id="closing-the-connection">Closing the connection</h3>
 <ul>
 <li><code>await websocket.close(code=1000)</code></li>
@@ -835,7 +839,7 @@ correctly updated.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.b41f3d20.js"></script>
+      <script src="../assets/javascripts/application.5e60981f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
