@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.572ca0f0.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.8c900955.js"></script>
     
     
       
@@ -57,6 +57,7 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
     
     
   </head>
@@ -514,6 +515,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mangum" title="Mangum" class="md-nav__link">
+    Mangum
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -537,6 +545,13 @@
           <li class="md-nav__item">
   <a href="#fastapi" title="FastAPI" class="md-nav__link">
     FastAPI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bocadillo" title="Bocadillo" class="md-nav__link">
+    Bocadillo
   </a>
   
 </li>
@@ -616,6 +631,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mangum" title="Mangum" class="md-nav__link">
+    Mangum
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -639,6 +661,13 @@
           <li class="md-nav__item">
   <a href="#fastapi" title="FastAPI" class="md-nav__link">
     FastAPI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bocadillo" title="Bocadillo" class="md-nav__link">
+    Bocadillo
   </a>
   
 </li>
@@ -713,6 +742,26 @@ type annotations.</p>
 </pre></div>
 
 
+<h3 id="mangum">Mangum</h3>
+<p>Link: <a href="https://github.com/erm/mangum" target="_blank">https://github.com/erm/mangum</a></p>
+<p>Serverless ASGI adapter for AWS Lambda &amp; API Gateway.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
+<span class="kn">from</span> <span class="nn">mangum</span> <span class="kn">import</span> <span class="n">Mangum</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+
+
+<span class="n">handler</span> <span class="o">=</span> <span class="n">Mangum</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>  <span class="c1"># optionally set debug=True</span>
+</pre></div>
+
+
 <h2 id="frameworks">Frameworks</h2>
 <h3 id="responder">Responder</h3>
 <p>Link: <a href="https://github.com/kennethreitz/responder" target="_blank">https://github.com/kennethreitz/responder</a></p>
@@ -765,6 +814,33 @@ type annotations.</p>
 <span class="nd">@app.get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">read_root</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">}</span>
+</pre></div>
+
+
+<h3 id="bocadillo">Bocadillo</h3>
+<p>Link: <a href="https://bocadilloproject.github.io" target="_blank">https://bocadilloproject.github.io</a></p>
+<p>A modern Python web framework filled with asynchronous salsa.</p>
+<p>Bocadillo is <strong>async-first</strong> and designed with productivity and simplicity in mind. It is not meant to be minimal: a <strong>carefully chosen set of included batteries</strong> helps you build performant web apps and services with minimal setup.</p>
+<p>Key features include:</p>
+<ul>
+<li>Simple, powerful and familiar views and routing, inspired by the greatest (Flask, Falcon).</li>
+<li>First-class support for both HTTP / REST and WebSocket.</li>
+<li>Built-in CORS, HSTS, GZip, HTTP streaming, Jinja2 templates, background tasks, static files…</li>
+</ul>
+<p>… and more ahead, as depicted in the <a href="https://github.com/bocadilloproject/bocadillo/blob/master/ROADMAP.md" target="_blank">Roadmap</a>.</p>
+<p>The example below demonstrates a simple WebSocket echo server.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">bocadillo</span> <span class="kn">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">WebSocket</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+
+<span class="nd">@api.websocket_route</span><span class="p">(</span><span class="s2">&quot;/echo&quot;</span><span class="p">)</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">ws</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">):</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">ws</span><span class="p">:</span>
+        <span class="n">async</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">ws</span><span class="p">:</span>
+            <span class="n">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
                 
                   
@@ -837,7 +913,7 @@ type annotations.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.5e60981f.js"></script>
+      <script src="../assets/javascripts/application.b41f3d20.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
