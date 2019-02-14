@@ -522,6 +522,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#nejma" title="Nejma ⭐" class="md-nav__link">
+    Nejma ⭐
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -638,6 +645,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#nejma" title="Nejma ⭐" class="md-nav__link">
+    Nejma ⭐
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -705,13 +719,71 @@
 <p>Document your REST API built with Starlette by declaring OpenAPI (Swagger) schemas in YAML format in your endpoints' docstrings.</p>
 <h3 id="starlette-api">Starlette API</h3>
 <p>Link: <a href="https://github.com/PeRDy/starlette-api" target="_blank">https://github.com/PeRDy/starlette-api</a></p>
-<p>That library aims to bring a layer on top of Starlette framework to provide useful mechanism for building APIs. It's based on API Star, inheriting some nice ideas like:</p>
+<p>That library aims to bring a layer on top of Starlette framework to provide useful mechanism for building APIs. It's 
+based on API Star, inheriting some nice ideas like:</p>
 <ul>
-<li><strong>Schema system</strong> based on Marshmallow that allows to declare the inputs and outputs of endpoints and provides a reliable way of validate data against those schemas.</li>
+<li><strong>Schema system</strong> based on <a href="https://github.com/marshmallow-code/marshmallow/">Marshmallow</a> that allows to <strong>declare</strong>
+the inputs and outputs of endpoints and provides a reliable way of <strong>validate</strong> data against those schemas.</li>
 <li><strong>Dependency Injection</strong> that ease the process of managing parameters needed in endpoints.</li>
-<li><strong>Components</strong> as the base of the plugin ecosystem, allowing you to create custom or use those already defined in your endpoints, injected as parameters.</li>
-<li><strong>Starlette ASGI</strong> objects like <code>Request</code>, <code>Response</code>, <code>Session</code> and so on are defined as components and ready to be injected in your endpoints.</li>
+<li><strong>Components</strong> as the base of the plugin ecosystem, allowing you to create custom or use those already defined in 
+your endpoints, injected as parameters.</li>
+<li><strong>Starlette ASGI</strong> objects like <code>Request</code>, <code>Response</code>, <code>Session</code> and so on are defined as components and ready to be 
+injected in your endpoints.</li>
+<li><strong>Auto generated API schema</strong> using OpenAPI standard. It uses the schema system of your endpoints to extract all the 
+necessary information to generate your API Schema.</li>
+<li><strong>Auto generated docs</strong> providing a <a href="https://swagger.io/tools/swagger-ui/">Swagger UI</a> or 
+<a href="https://rebilly.github.io/ReDoc/">ReDocs</a> endpoint.</li>
 </ul>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">validate</span>
+<span class="kn">from</span> <span class="nn">starlette_api.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+
+
+<span class="c1"># Data Schema</span>
+<span class="k">class</span> <span class="nc">Puppy</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="o">.</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+
+<span class="c1"># Database</span>
+<span class="n">puppies</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Canna&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sandy&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span>
+<span class="p">]</span>
+
+
+<span class="c1"># Application</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span>
+    <span class="n">components</span><span class="o">=</span><span class="p">[],</span>      <span class="c1"># Without custom components</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Foo&quot;</span><span class="p">,</span>        <span class="c1"># API title</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="p">,</span>      <span class="c1"># API version</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bar&quot;</span><span class="p">,</span>  <span class="c1"># API description</span>
+    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;/schema/&quot;</span><span class="p">,</span>  <span class="c1"># Path to expose OpenAPI schema</span>
+    <span class="n">docs</span><span class="o">=</span><span class="s2">&quot;/docs/&quot;</span><span class="p">,</span>      <span class="c1"># Path to expose Swagger UI docs</span>
+    <span class="n">redoc</span><span class="o">=</span><span class="s2">&quot;/redoc/&quot;</span><span class="p">,</span>    <span class="c1"># Path to expose ReDoc docs</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Views</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">list_puppies</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Puppy</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List the puppies collection. There is an optional query parameter that </span>
+<span class="sd">    specifies a name for filtering the collection based on it.</span>
+
+<span class="sd">    Request example:</span>
+<span class="sd">    GET http://example.com/?name=Sandy</span>
+
+<span class="sd">    Response example:</span>
+<span class="sd">    200</span>
+<span class="sd">    [</span>
+<span class="sd">        {&quot;id&quot;: 2, &quot;name&quot;: &quot;Sandy&quot;, &quot;age&quot;: 12}</span>
+<span class="sd">    ]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">puppy</span> <span class="k">for</span> <span class="n">puppy</span> <span class="ow">in</span> <span class="n">puppies</span> <span class="k">if</span> <span class="n">puppy</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+</pre></div>
+
+
 <h3 id="webargs-starlette">webargs-starlette</h3>
 <p>Link: <a href="https://github.com/sloria/webargs-starlette" target="_blank">https://github.com/sloria/webargs-starlette</a></p>
 <p>Declarative request parsing and validation for Starlette, built on top
@@ -762,6 +834,35 @@ type annotations.</p>
 </pre></div>
 
 
+<h3 id="nejma">Nejma ⭐</h3>
+<p>Link: <a href="https://github.com/taoufik07/nejma" target="_blank">https://github.com/taoufik07/nejma</a></p>
+<p>Helps you manage and send messages to groups of channels.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">nejma.ext.starlette</span> <span class="kn">import</span> <span class="n">WebSocketEndpoint</span>
+
+<span class="nd">@app.websocket_route</span><span class="p">(</span><span class="s2">&quot;/ws&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Chat</span><span class="p">(</span><span class="n">WebSocketEndpoint</span><span class="p">):</span>
+    <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span>
+
+    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">room_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;room_id&#39;</span><span class="p">]</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;group_{room_id}&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">channel_layer</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+
+            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+                <span class="s2">&quot;room_id&quot;</span><span class="p">:</span> <span class="n">room_id</span>
+            <span class="p">}</span>
+            <span class="n">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_layer</span><span class="o">.</span><span class="n">group_send</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Checkout <a href="https://github.com/taoufik07/nejma-chat" target="_blank">nejma-chat</a>, a simple chat application built using <code>nejma</code> and <code>starlette</code>.</p>
 <h2 id="frameworks">Frameworks</h2>
 <h3 id="responder">Responder</h3>
 <p>Link: <a href="https://github.com/kennethreitz/responder" target="_blank">https://github.com/kennethreitz/responder</a></p>
