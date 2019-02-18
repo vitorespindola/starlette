@@ -2,7 +2,7 @@
 
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.572ca0f0.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.8c900955.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -57,7 +57,6 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
     
     
   </head>
@@ -673,9 +672,11 @@ instance, and a couple of endpoints that interact with the database.</p>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/notes&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="n">async</span> <span class="k">def</span> <span class="nf">add_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;completed&quot;</span><span class="p">]}</span>
-    <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span>
+       <span class="n">text</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+       <span class="n">completed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;completed&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span>
         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
         <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;completed&quot;</span><span class="p">]</span>
@@ -690,8 +691,8 @@ instance, and a couple of endpoints that interact with the database.</p>
 <li><code>rows = await database.fetch_all(query)</code></li>
 <li><code>row = await database.fetch_one(query)</code></li>
 <li><code>async for row in database.iterate(query)</code></li>
-<li><code>await database.execute(query, values)</code></li>
-<li><code>await database.execute_many(query, values)</code></li>
+<li><code>await database.execute(query)</code></li>
+<li><code>await database.execute_many(query)</code></li>
 </ul>
 <h2 id="transactions">Transactions</h2>
 <p>Database transactions are available either as a decorator, as a
@@ -701,8 +702,8 @@ context manager, or as a low-level API.</p>
 <span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># This database insert occurs within a transaction.</span>
     <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
-    <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
 </pre></div>
 
@@ -712,8 +713,8 @@ context manager, or as a low-level API.</p>
     <span class="n">async</span> <span class="k">with</span> <span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
         <span class="c1"># This database insert occurs within a transaction.</span>
         <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
-        <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
 </pre></div>
 
@@ -724,8 +725,8 @@ context manager, or as a low-level API.</p>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># This database insert occurs within a transaction.</span>
         <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
-        <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">transaction</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
@@ -758,9 +759,9 @@ meet those requirements:</p>
 <span class="c1"># Use &#39;force_rollback&#39; during testing, to ensure we do not persist database changes</span>
 <span class="c1"># between each test case.</span>
 <span class="k">if</span> <span class="n">TESTING</span><span class="p">:</span>
-    <span class="n">database</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">TEST_DATABASE_URL</span><span class="p">,</span> <span class="n">force_rollback</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="n">databases</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">TEST_DATABASE_URL</span><span class="p">,</span> <span class="n">force_rollback</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">database</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="n">databases</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
 </pre></div>
 
 
@@ -937,7 +938,7 @@ a database that's in a consistent state with your live database.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.b41f3d20.js"></script>
+      <script src="../assets/javascripts/application.5e60981f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

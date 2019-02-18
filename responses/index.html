@@ -2,7 +2,7 @@
 
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
     
     
       
@@ -42,12 +42,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.572ca0f0.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.8c900955.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -57,7 +57,6 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
     
     
   </head>
@@ -331,13 +330,6 @@
         <li class="md-nav__item">
   <a href="#plaintextresponse" title="PlainTextResponse" class="md-nav__link">
     PlainTextResponse
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#templateresponse" title="TemplateResponse" class="md-nav__link">
-    TemplateResponse
   </a>
   
 </li>
@@ -652,13 +644,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#templateresponse" title="TemplateResponse" class="md-nav__link">
-    TemplateResponse
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#jsonresponse" title="JSONResponse" class="md-nav__link">
     JSONResponse
   </a>
@@ -786,48 +771,6 @@ ASGI application instance.</p>
     <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
         <span class="n">await</span> <span class="n">response</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</pre></div>
-
-
-<h3 id="templateresponse">TemplateResponse</h3>
-<p>The <code>TemplateResponse</code> class return plain text responses generated
-from a template instance, and a dictionary of context to render into the
-template.</p>
-<p>A <code>request</code> argument must always be included in the context. Responses default
-to <code>text/html</code> unless an alternative <code>media_type</code> is specified.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
-<span class="kn">from</span> <span class="nn">starlette.requests</span> <span class="kn">import</span> <span class="n">Request</span>
-
-<span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">FileSystemLoader</span>
-
-
-<span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s1">&#39;templates&#39;</span><span class="p">))</span>
-
-
-<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">scope</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;http&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
-
-    <span class="n">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
-        <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">Request</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">),</span>
-        <span class="p">}</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">response</span><span class="p">(</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</pre></div>
-
-
-<p>The advantage with using <code>TemplateResponse</code> over <code>HTMLResponse</code> is that
-it will make <code>template</code> and <code>context</code> properties available on response instances
-returned by the test client.</p>
-<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">test_app</span><span class="p">():</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">App</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;index.html&quot;</span>
-    <span class="k">assert</span> <span class="s2">&quot;request&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
 </pre></div>
 
 
@@ -1005,7 +948,7 @@ you are micro-optimising a particular endpoint.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.b41f3d20.js"></script>
+      <script src="../assets/javascripts/application.5e60981f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
