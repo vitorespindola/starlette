@@ -594,12 +594,13 @@ in order to determine a complete API schema.</p>
 but includes a simple implementation that generates OpenAPI schemas based on
 the docstrings.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="kn">from</span> <span class="nn">starlette.schemas</span> <span class="kn">import</span> <span class="n">SchemaGenerator</span><span class="p">,</span> <span class="n">OpenAPIResponse</span>
+<span class="kn">from</span> <span class="nn">starlette.schemas</span> <span class="kn">import</span> <span class="n">SchemaGenerator</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">schema_generator</span> <span class="o">=</span> <span class="n">SchemaGenerator</span><span class="p">(</span>
+
+<span class="n">schemas</span> <span class="o">=</span> <span class="n">SchemaGenerator</span><span class="p">(</span>
     <span class="p">{</span><span class="s2">&quot;openapi&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example API&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">}}</span>
 <span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
 
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
@@ -627,14 +628,15 @@ the docstrings.</p>
 
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/schema&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span> <span class="n">include_in_schema</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">schema</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">OpenAPIResponse</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">openapi_schema</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">schemas</span><span class="o">.</span><span class="n">OpenAPIResponse</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 
 
 <p>We can now access an OpenAPI schema at the "/schema" endpoint.</p>
-<p>You can inspect the API Schema directly by accessing <code>app.schema</code>:</p>
-<div class="codehilite"><pre><span></span><span class="k">assert</span> <span class="n">app</span><span class="o">.</span><span class="n">schema</span> <span class="o">==</span> <span class="p">{</span>
+<p>You can generate the API Schema directly with <code>.get_schema(routes)</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">schemas</span><span class="o">.</span><span class="n">get_schema</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">routes</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">schema</span> <span class="o">==</span> <span class="p">{</span>
     <span class="s2">&quot;openapi&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
     <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example API&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">},</span>
     <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -666,7 +668,8 @@ use tooling such as generating API documentation.</p>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;run&quot;</span><span class="p">:</span>
         <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">arvg</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;schema&quot;</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">schemas</span><span class="o">.</span><span class="n">get_schema</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">routes</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
 </pre></div>
 
 
