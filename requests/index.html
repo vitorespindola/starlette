@@ -345,6 +345,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#other-state" title="Other state" class="md-nav__link">
+    Other state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -659,6 +666,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#other-state" title="Other state" class="md-nav__link">
+    Other state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -764,6 +778,11 @@ will raise an error.</p>
 <p>In some cases such as long-polling, or streaming responses you might need to
 determine if the client has dropped the connection. You can determine this
 state with <code>disconnected = await request.is_disconnected()</code>.</p>
+<h4 id="other-state">Other state</h4>
+<p>If you want to store additional information on the request you can do so
+using <code>request.state</code>.</p>
+<p>For example:</p>
+<p><code>request.state.time_started = time.time()</code></p>
                 
                   
                 

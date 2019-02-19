@@ -92,7 +92,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#0110" tabindex="1" class="md-skip">
+      <a href="#0111" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -496,6 +496,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0111" title="0.11.1" class="md-nav__link">
+    0.11.1
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#0110" title="0.11.0" class="md-nav__link">
@@ -1014,6 +1021,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0111" title="0.11.1" class="md-nav__link">
+    0.11.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0110" title="0.11.0" class="md-nav__link">
     0.11.0
   </a>
@@ -1519,13 +1533,19 @@
                 
                   <h1>Release Notes</h1>
                 
-                <h2 id="0110">0.11.0</h2>
+                <h2 id="0111">0.11.1</h2>
+<ul>
+<li>Add <code>request.state</code> interface, for storing arbitrary additional information.</li>
+<li>Support disabling GraphiQL with <code>GraphQLApp(..., graphiql=False)</code>.</li>
+</ul>
+<h2 id="0110">0.11.0</h2>
 <ul>
 <li><code>DatabaseMiddleware</code> is now dropped in favour of <code>databases</code></li>
 <li>Templates are no longer configured on the application instance. Use <code>templates = Jinja2Templates(directory=...)</code> and <code>return templates.TemplateResponse('index.html', {"request": request})</code></li>
 <li>Schema generation is no longer attached to the application instance. Use <code>schemas = SchemaGenerator(...)</code> and <code>return schemas.OpenAPIResponse(request=request)</code></li>
 <li><code>LifespanMiddleware</code> is dropped in favor of router-based lifespan handling.</li>
 <li>Application instances now accept a <code>routes</code> argument, <code>Starlette(routes=[...])</code></li>
+<li>Schema generation now includes mounted routes.</li>
 </ul>
 <h2 id="0106">0.10.6</h2>
 <ul>
