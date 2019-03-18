@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.1">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -698,7 +698,7 @@ which is ideal for building high performance asyncio services.</p>
 <span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
 <span class="kn">import</span> <span class="nn">uvicorn</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="n">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
@@ -747,6 +747,7 @@ INFO: Uvicorn running on http://127.0.0.1:8000 <span class="o">(</span>Press CTR
 </pre></div>
 
 
+<p>Run uvicorn with <code>--reload</code> to enable auto-reloading on code changes.</p>
 <h2 id="modularity">Modularity</h2>
 <p>The modularity that Starlette is designed on promotes building re-usable
 components that can be shared between any ASGI framework. This should enable
@@ -839,7 +840,7 @@ CPU constrained.</p>
       
     </div>
     
-      <script src="assets/javascripts/application.b806dc00.js"></script>
+      <script src="assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
       
