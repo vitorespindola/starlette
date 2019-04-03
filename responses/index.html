@@ -826,7 +826,7 @@ you are micro-optimising a particular endpoint.</p>
 
 
 <h3 id="streamingresponse">StreamingResponse</h3>
-<p>Takes an async generator and streams the response body.</p>
+<p>Takes an async generator or a normal generator/iterator and streams the response body.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">StreamingResponse</span>
 <span class="kn">import</span> <span class="nn">asyncio</span>
 
@@ -851,6 +851,7 @@ you are micro-optimising a particular endpoint.</p>
 </pre></div>
 
 
+<p>Have in mind that <a href="https://docs.python.org/3/glossary.html#term-file-like-object" target="_blank">file-like</a> objects (like those created by <code>open()</code>) are normal iterators. So, you can return them directly in a <code>StreamingResponse</code>.</p>
 <h3 id="fileresponse">FileResponse</h3>
 <p>Asynchronously streams a file as the response.</p>
 <p>Takes a different set of arguments to instantiate than the other response types:</p>
