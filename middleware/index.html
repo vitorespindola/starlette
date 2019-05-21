@@ -428,6 +428,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#timingmiddleware" title="TimingMiddleware" class="md-nav__link">
+    TimingMiddleware
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -709,6 +716,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#timingmiddleware" title="TimingMiddleware" class="md-nav__link">
+    TimingMiddleware
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -872,11 +886,11 @@ interface, rather than dealing with ASGI messages directly.</p>
 <p>If you want to provide configuration options to the middleware class you should
 override the <code>__init__</code> method, ensuring that the first argument is <code>app</code>, and
 any remaining arguments are optional keyword arguments. Make sure to set the <code>app</code>
-attribute on the class if you do this.</p>
+attribute on the instance if you do this.</p>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">CustomHeaderMiddleware</span><span class="p">(</span><span class="n">BaseHTTPMiddleware</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">header_value</span><span class="o">=</span><span class="s1">&#39;Example&#39;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_value</span> <span class="o">=</span> <span class="n">header_value</span>
 
     <span class="n">async</span> <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -909,6 +923,9 @@ any other behaviour.</p>
 <h4 id="proxyheadersmiddleware"><a href="https://github.com/encode/uvicorn/blob/master/uvicorn/middleware/proxy_headers.py">ProxyHeadersMiddleware</a></h4>
 <p>Uvicorn includes a middleware class for determining the client IP address,
 when proxy servers are being used, based on the <code>X-Forwarded-Proto</code> and <code>X-Forwarded-For</code> headers. For more complex proxy configurations, you might want to adapt this middleware.</p>
+<h4 id="timingmiddleware"><a href="https://github.com/steinnes/timing-asgi">TimingMiddleware</a></h4>
+<p>A middleware class to emit timing information (cpu and wall time) for each request which
+passes through it.  Includes examples for how to emit these timings as statsd metrics.</p>
                 
                   
                 

@@ -96,7 +96,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#0111" tabindex="1" class="md-skip">
+      <a href="#0120" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -492,6 +492,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0120" title="0.12.0" class="md-nav__link">
+    0.12.0
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#0111" title="0.11.1" class="md-nav__link">
@@ -1017,6 +1024,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0120" title="0.12.0" class="md-nav__link">
+    0.12.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0111" title="0.11.1" class="md-nav__link">
     0.11.1
   </a>
@@ -1529,7 +1543,14 @@
                 
                   <h1>Release Notes</h1>
                 
-                <h2 id="0111">0.11.1</h2>
+                <h2 id="0120">0.12.0</h2>
+<ul>
+<li>Switch to ASGI 3.0.</li>
+<li>Fixes to CORS middleware.</li>
+<li>Add <code>StaticFiles(html=True)</code> support.</li>
+<li>Fix path quoting in redirect responses.</li>
+</ul>
+<h2 id="0111">0.11.1</h2>
 <ul>
 <li>Add <code>request.state</code> interface, for storing arbitrary additional information.</li>
 <li>Support disabling GraphiQL with <code>GraphQLApp(..., graphiql=False)</code>.</li>

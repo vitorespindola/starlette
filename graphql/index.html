@@ -646,6 +646,7 @@ seperate thread.</p>
 make sure to setup Graphene's AsyncioExecutor using the <code>executor</code> argument.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">graphql.execution.executors.asyncio</span> <span class="kn">import</span> <span class="n">AsyncioExecutor</span>
 <span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<span class="kn">from</span> <span class="nn">starlette.graphql</span> <span class="kn">import</span> <span class="n">GraphQLApp</span>
 <span class="kn">import</span> <span class="nn">graphene</span>
 
 
