@@ -285,6 +285,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#storing-state-on-the-app-instance" title="Storing state on the app instance" class="md-nav__link">
+    Storing state on the app instance
+  </a>
+  
+</li>
+      
       
       
       
@@ -470,6 +477,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../server-push/" title="Server Push" class="md-nav__link">
+      Server Push
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../exceptions/" title="Exceptions" class="md-nav__link">
       Exceptions
     </a>
@@ -577,6 +596,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#storing-state-on-the-app-instance" title="Storing state on the app instance" class="md-nav__link">
+    Storing state on the app instance
+  </a>
+  
+</li>
+      
       
       
       
@@ -668,6 +694,12 @@ exceptions that occur within the application:</p>
 <li><code>@app.exception_handler(exc_class_or_status_code)</code> - Add an error handler, decorator style.</li>
 <li><code>app.debug</code> - Enable or disable error tracebacks in the browser.</li>
 </ul>
+<h3 id="storing-state-on-the-app-instance">Storing state on the app instance</h3>
+<p>You can store arbitrary extra state on the application instance, using the
+generic <code>app.state</code> attribute.</p>
+<p>For example:</p>
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">ADMIN_EMAIL</span> <span class="o">=</span> <span class="s1">&#39;admin@example.org&#39;</span>
+</pre></div>
                 
                   
                 
