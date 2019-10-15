@@ -292,6 +292,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#acessing-the-app-instance" title="Acessing the app instance" class="md-nav__link">
+    Acessing the app instance
+  </a>
+  
+</li>
+      
       
       
       
@@ -603,6 +610,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#acessing-the-app-instance" title="Acessing the app instance" class="md-nav__link">
+    Acessing the app instance
+  </a>
+  
+</li>
+      
       
       
       
@@ -700,6 +714,10 @@ generic <code>app.state</code> attribute.</p>
 <p>For example:</p>
 <div class="codehilite"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">ADMIN_EMAIL</span> <span class="o">=</span> <span class="s1">&#39;admin@example.org&#39;</span>
 </pre></div>
+
+
+<h3 id="acessing-the-app-instance">Acessing the app instance</h3>
+<p>Where a <code>request</code> is available (i.e. endpoints and middleware), the app is available on <code>request.app</code>.  For other situations it can be imported from wherever it's instantiated.</p>
                 
                   
                 
