@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
       
     
@@ -171,7 +171,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -251,50 +251,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#instantiating-the-application" title="Instantiating the application" class="md-nav__link">
+  <a href="#instantiating-the-application" class="md-nav__link">
     Instantiating the application
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-routes-to-the-application" title="Adding routes to the application" class="md-nav__link">
-    Adding routes to the application
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-event-handlers-to-the-application" title="Adding event handlers to the application" class="md-nav__link">
-    Adding event handlers to the application
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#submounting-other-applications" title="Submounting other applications" class="md-nav__link">
-    Submounting other applications
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#customizing-exception-handling" title="Customizing exception handling" class="md-nav__link">
-    Customizing exception handling
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#storing-state-on-the-app-instance" title="Storing state on the app instance" class="md-nav__link">
+  <a href="#storing-state-on-the-app-instance" class="md-nav__link">
     Storing state on the app instance
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#acessing-the-app-instance" title="Acessing the app instance" class="md-nav__link">
-    Acessing the app instance
+  <a href="#accessing-the-app-instance" class="md-nav__link">
+    Accessing the app instance
   </a>
   
 </li>
@@ -569,50 +541,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#instantiating-the-application" title="Instantiating the application" class="md-nav__link">
+  <a href="#instantiating-the-application" class="md-nav__link">
     Instantiating the application
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-routes-to-the-application" title="Adding routes to the application" class="md-nav__link">
-    Adding routes to the application
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-event-handlers-to-the-application" title="Adding event handlers to the application" class="md-nav__link">
-    Adding event handlers to the application
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#submounting-other-applications" title="Submounting other applications" class="md-nav__link">
-    Submounting other applications
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#customizing-exception-handling" title="Customizing exception handling" class="md-nav__link">
-    Customizing exception handling
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#storing-state-on-the-app-instance" title="Storing state on the app instance" class="md-nav__link">
+  <a href="#storing-state-on-the-app-instance" class="md-nav__link">
     Storing state on the app instance
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#acessing-the-app-instance" title="Acessing the app instance" class="md-nav__link">
-    Acessing the app instance
+  <a href="#accessing-the-app-instance" class="md-nav__link">
+    Accessing the app instance
   </a>
   
 </li>
@@ -640,74 +584,68 @@
 its other functionality.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
 <span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
+<span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">Route</span><span class="p">,</span> <span class="n">Mount</span><span class="p">,</span> <span class="n">WebSocketRoute</span>
 <span class="kn">from</span> <span class="nn">starlette.staticfiles</span> <span class="kn">import</span> <span class="n">StaticFiles</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">app</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/static&#39;</span><span class="p">,</span> <span class="n">StaticFiles</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s2">&quot;static&quot;</span><span class="p">))</span>
-
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/user/me&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">user_me</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;John Doe&quot;</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/user/{username}&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path_params</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
 
-
-<span class="nd">@app.websocket_route</span><span class="p">(</span><span class="s1">&#39;/ws&#39;</span><span class="p">)</span>
 <span class="n">async</span> <span class="k">def</span> <span class="nf">websocket_endpoint</span><span class="p">(</span><span class="n">websocket</span><span class="p">):</span>
     <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
     <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="s1">&#39;Hello, websocket!&#39;</span><span class="p">)</span>
     <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-
-<span class="nd">@app.on_event</span><span class="p">(</span><span class="s1">&#39;startup&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">startup</span><span class="p">():</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ready to go&#39;</span><span class="p">)</span>
+
+
+<span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">homepage</span><span class="p">),</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/user/me&#39;</span><span class="p">,</span> <span class="n">user_me</span><span class="p">),</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/user/{username}&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">),</span>
+    <span class="n">WebSocketRoute</span><span class="p">(</span><span class="s1">&#39;/ws&#39;</span><span class="p">,</span> <span class="n">websocket_endpoint</span><span class="p">),</span>
+    <span class="n">Mount</span><span class="p">(</span><span class="s1">&#39;/static&#39;</span><span class="p">,</span> <span class="n">StaticFiles</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s2">&quot;static&quot;</span><span class="p">)),</span>
+<span class="p">]</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">routes</span><span class="o">=</span><span class="n">routes</span><span class="p">,</span> <span class="n">on_startup</span><span class="o">=</span><span class="p">[</span><span class="n">startup</span><span class="p">])</span>
 </pre></div>
 
 
 <h3 id="instantiating-the-application">Instantiating the application</h3>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>starlette.applications.<strong>Starlette</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">debug=False</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">routes=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">middleware=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exception_handlers=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">on_startup=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">on_shutdown=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Creates an application instance.</p>
+<p><strong>Parameters:</strong></p>
 <ul>
-<li><code>Starlette(debug=False)</code> - Create a new Starlette application.</li>
-</ul>
-<h3 id="adding-routes-to-the-application">Adding routes to the application</h3>
-<p>You can use any of the following to add handled routes to the application:</p>
-<ul>
-<li><code>app.add_route(path, func, methods=["GET"])</code> - Add an HTTP route. The function may be either a coroutine or a regular function, with a signature like <code>func(request, **kwargs) -&gt; response</code>.</li>
-<li><code>app.add_websocket_route(path, func)</code> - Add a websocket session route. The function must be a coroutine, with a signature like <code>func(session, **kwargs)</code>.</li>
-<li><code>@app.route(path)</code> - Add an HTTP route, decorator style.</li>
-<li><code>@app.websocket_route(path)</code> - Add a WebSocket route, decorator style.</li>
-</ul>
-<h3 id="adding-event-handlers-to-the-application">Adding event handlers to the application</h3>
-<p>There are two ways to add event handlers:</p>
-<ul>
-<li><code>@app.on_event(event_type)</code> - Add an event, decorator style</li>
-<li><code>app.add_event_handler(event_type, func)</code> - Add an event through a function call.</li>
-</ul>
-<p><code>event_type</code> must be specified as either <code>'startup'</code> or <code>'shutdown'</code>.</p>
-<h3 id="submounting-other-applications">Submounting other applications</h3>
-<p>Submounting applications is a powerful way to include reusable ASGI applications.</p>
-<ul>
-<li><code>app.mount(prefix, app)</code> - Include an ASGI app, mounted under the given path prefix</li>
-</ul>
-<h3 id="customizing-exception-handling">Customizing exception handling</h3>
-<p>You can use either of the following to catch and handle particular types of
-exceptions that occur within the application:</p>
-<ul>
-<li><code>app.add_exception_handler(exc_class_or_status_code, handler)</code> - Add an error handler. The handler function may be either a coroutine or a regular function, with a signature like <code>func(request, exc) -&gt; response</code>.</li>
-<li><code>@app.exception_handler(exc_class_or_status_code)</code> - Add an error handler, decorator style.</li>
-<li><code>app.debug</code> - Enable or disable error tracebacks in the browser.</li>
-</ul>
+<li><strong>debug</strong> - Boolean indicating if debug tracebacks should be returned on errors.</li>
+<li><strong>routes</strong> - A list of routes to serve incoming HTTP and WebSocket requests.</li>
+<li><strong>middleware</strong> - A list of middleware to run for every request. A starlette
+application will always automatically include two middleware classes.
+<code>ServerErrorMiddleware</code> is added the very outermost middleware, to handle
+any uncaught errors occuring anywhere in the entire stack.
+<code>ExceptionMiddleware</code> is added as the very innermost middleware, to deal
+with handled exception cases occuring in the routing or endpoints.</li>
+<li><strong>exception_handlers</strong> - A dictionary mapping either integer status codes,
+or exception class types onto callables which handle the exceptions.
+Exception handler callables should be of the form <code>handler(request, exc) -&gt; response</code>
+and may be be either standard functions, or async functions.</li>
+<li><strong>on_startup</strong> - A list of callables to run on application startup.
+Startup handler callables do not take any arguments, and may be be either
+standard functions, or async functions.</li>
+<li><strong>on_shutdown</strong> - A list of callables to run on application shutdown.
+Shutdown handler callables do not take any arguments, and may be be either
+standard functions, or async functions.</li>
+</ul></div>
+</div>
 <h3 id="storing-state-on-the-app-instance">Storing state on the app instance</h3>
 <p>You can store arbitrary extra state on the application instance, using the
 generic <code>app.state</code> attribute.</p>
@@ -716,8 +654,8 @@ generic <code>app.state</code> attribute.</p>
 </pre></div>
 
 
-<h3 id="acessing-the-app-instance">Acessing the app instance</h3>
-<p>Where a <code>request</code> is available (i.e. endpoints and middleware), the app is available on <code>request.app</code>.  For other situations it can be imported from wherever it's instantiated.</p>
+<h3 id="accessing-the-app-instance">Accessing the app instance</h3>
+<p>Where a <code>request</code> is available (i.e. endpoints and middleware), the app is available on <code>request.app</code>.</p>
                 
                   
                 
@@ -787,7 +725,7 @@ generic <code>app.state</code> attribute.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.245445c6.js"></script>
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
