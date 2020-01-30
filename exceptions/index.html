@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -576,10 +576,10 @@ how you return responses when errors or handled exceptions occur.</p>
 <span class="n">HTML_500_PAGE</span> <span class="o">=</span> <span class="o">...</span>
 
 
-<span class="n">async</span> <span class="k">def</span> <span class="nf">not_found</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">not_found</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">HTML_404_PAGE</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
-<span class="n">async</span> <span class="k">def</span> <span class="nf">server_error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">server_error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">HTML_500_PAGE</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 
@@ -594,7 +594,7 @@ how you return responses when errors or handled exceptions occur.</p>
 
 <p>If <code>debug</code> is enabled and an error occurs, then instead of using the installed
 500 handler, Starlette will respond with a traceback response.</p>
-<div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">routes</span><span class="o">=</span><span class="n">routes</span><span class="p">,</span> <span class="n">exception_handlers</span><span class="o">=</span><span class="n">exception_handlers</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">routes</span><span class="o">=</span><span class="n">routes</span><span class="p">,</span> <span class="n">exception_handlers</span><span class="o">=</span><span class="n">exception_handlers</span><span class="p">)</span>
 </pre></div>
 
 
@@ -602,7 +602,7 @@ how you return responses when errors or handled exceptions occur.</p>
 register handlers for classes of exceptions.</p>
 <p>In particular you might want to override how the built-in <code>HTTPException</code> class
 is handled. For example, to use JSON style responses:</p>
-<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">http_exception</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">http_exception</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="n">exc</span><span class="o">.</span><span class="n">detail</span><span class="p">},</span> <span class="n">status_code</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 <span class="n">exception_handlers</span> <span class="o">=</span> <span class="p">{</span>
@@ -640,6 +640,7 @@ returning plain-text HTTP responses for any <code>HTTPException</code>.</p>
 classes should instead just return appropriate responses directly.</p>
                 
                   
+                
                 
               
               
@@ -707,7 +708,7 @@ classes should instead just return appropriate responses directly.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

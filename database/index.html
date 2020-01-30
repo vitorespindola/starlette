@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -595,7 +595,7 @@
                   <h1>Database</h1>
                 
                 <p>Starlette is not strictly tied to any particular database implementation.</p>
-<p>You can use it with an asynchronous ORM, such as <a href="https://python-gino.readthedocs.io/en/latest/">GINO</a>,
+<p>You can use it with an asynchronous ORM, such as <a href="https://python-gino.org/">GINO</a>,
 or use regular non-async endpoints, and integrate with <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>.</p>
 <p>In this documentation we'll demonstrate how to integrate against <a href="https://github.com/encode/databases">the <code>databases</code> package</a>,
 which provides SQLAlchemy core support against a range of different database drivers.</p>
@@ -615,6 +615,7 @@ instance, and a couple of endpoints that interact with the database.</p>
 <span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
 <span class="kn">from</span> <span class="nn">starlette.config</span> <span class="kn">import</span> <span class="n">Config</span>
 <span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+<span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">Route</span>
 
 
 <span class="c1"># Configuration from environment variables or &#39;.env&#39; file.</span>
@@ -628,7 +629,7 @@ instance, and a couple of endpoints that interact with the database.</p>
 <span class="n">notes</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
     <span class="s2">&quot;notes&quot;</span><span class="p">,</span>
     <span class="n">metadata</span><span class="p">,</span>
-    <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">),</span>
     <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;completed&quot;</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Boolean</span><span class="p">),</span>
 <span class="p">)</span>
@@ -637,9 +638,9 @@ instance, and a couple of endpoints that interact with the database.</p>
 
 
 <span class="c1"># Main application code.</span>
-<span class="n">async</span> <span class="k">def</span> <span class="nf">list_notes</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">list_notes</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">database</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="n">content</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
@@ -649,13 +650,13 @@ instance, and a couple of endpoints that interact with the database.</p>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
-<span class="n">async</span> <span class="k">def</span> <span class="nf">add_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">add_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span>
        <span class="n">text</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
        <span class="n">completed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;completed&quot;</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span>
         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
         <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;completed&quot;</span><span class="p">]</span>
@@ -688,35 +689,35 @@ instance, and a couple of endpoints that interact with the database.</p>
 <p>Database transactions are available either as a decorator, as a
 context manager, or as a low-level API.</p>
 <p>Using a decorator on an endpoint:</p>
-<div class="codehilite"><pre><span></span><span class="nd">@database.transaction</span><span class="p">()</span>
-<span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="nd">@database</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># This database insert occurs within a transaction.</span>
     <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
 </pre></div>
 
 
 <p>Using a context manager:</p>
-<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">with</span> <span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
         <span class="c1"># This database insert occurs within a transaction.</span>
         <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
 </pre></div>
 
 
 <p>Using the low-level API:</p>
-<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">transaction</span> <span class="o">=</span> <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">populate_note</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">transaction</span> <span class="o">=</span> <span class="k">await</span> <span class="n">database</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># This database insert occurs within a transaction.</span>
         <span class="c1"># It will be rolled back by the `RuntimeError`.</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;you won&#39;t see me&quot;</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">transaction</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
@@ -742,14 +743,14 @@ meet those requirements:</p>
 
 <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s2">&quot;.env&quot;</span><span class="p">)</span>
 
-<span class="n">TESTING</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;TESTING&#39;</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">TESTING</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;TESTING&#39;</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="n">databases</span><span class="o">.</span><span class="n">DatabaseURL</span><span class="p">)</span>
 <span class="n">TEST_DATABASE_URL</span> <span class="o">=</span> <span class="n">DATABASE_URL</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s1">&#39;test_&#39;</span> <span class="o">+</span> <span class="n">DATABASE_URL</span><span class="o">.</span><span class="n">database</span><span class="p">)</span>
 
 <span class="c1"># Use &#39;force_rollback&#39; during testing, to ensure we do not persist database changes</span>
 <span class="c1"># between each test case.</span>
 <span class="k">if</span> <span class="n">TESTING</span><span class="p">:</span>
-    <span class="n">database</span> <span class="o">=</span> <span class="n">databases</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">TEST_DATABASE_URL</span><span class="p">,</span> <span class="n">force_rollback</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="n">databases</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">TEST_DATABASE_URL</span><span class="p">,</span> <span class="n">force_rollback</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">database</span> <span class="o">=</span> <span class="n">databases</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
 </pre></div>
@@ -771,7 +772,7 @@ Assuming we're using <code>py.test</code>, here's how our <code>conftest.py</cod
 <span class="kn">import</span> <span class="nn">app</span>
 
 
-<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_test_database</span><span class="p">():</span>
   <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Create a clean database on every test case.</span>
@@ -780,7 +781,7 @@ Assuming we're using <code>py.test</code>, here's how our <code>conftest.py</cod
 <span class="sd">  We use the `sqlalchemy_utils` package here for a few helpers in consistently</span>
 <span class="sd">  creating and dropping the database.</span>
 <span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">TEST_DATABASE_URL</span><span class="p">)</span>
   <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
   <span class="k">assert</span> <span class="ow">not</span> <span class="n">database_exists</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="s1">&#39;Test database already exists. Aborting tests.&#39;</span>
   <span class="n">create_database</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>             <span class="c1"># Create the test database.</span>
@@ -789,7 +790,7 @@ Assuming we're using <code>py.test</code>, here's how our <code>conftest.py</cod
   <span class="n">drop_database</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>               <span class="c1"># Drop the test database.</span>
 
 
-<span class="nd">@pytest.fixture</span><span class="p">()</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">client</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    When using the &#39;client&#39; fixture in test cases, we&#39;ll get full database</span>
@@ -847,7 +848,7 @@ a database that's in a consistent state with your live database.</p>
 
 <span class="o">...</span>
 
-<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_test_database</span><span class="p">():</span>
     <span class="n">url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>
     <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -860,6 +861,7 @@ a database that's in a consistent state with your live database.</p>
 </pre></div>
                 
                   
+                
                 
               
               
@@ -927,7 +929,7 @@ a database that's in a consistent state with your live database.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -575,8 +575,8 @@ handling HTTP method dispatching and WebSocket sessions.</p>
 
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">HTTPEndpoint</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -590,18 +590,18 @@ rather than to an instance of the class:</p>
 
 
 <span class="k">class</span> <span class="nc">Homepage</span><span class="p">(</span><span class="n">HTTPEndpoint</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">HTTPEndpoint</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path_params</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Hello, {username}&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{username}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">Route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">Homepage</span><span class="p">),</span>
-    <span class="n">Route</span><span class="p">(</span><span class="s2">&quot;/{username}&quot;</span><span class="p">,</span> <span class="n">User</span><span class="p">)</span>
+    <span class="n">Route</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{username}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">User</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="n">routes</span><span class="p">)</span>
@@ -633,13 +633,13 @@ has an attribute <code>encoding</code> which may optionally be set, in order to 
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">WebSocketEndpoint</span><span class="p">):</span>
     <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;bytes&#39;</span>
 
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">):</span>
-        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_bytes</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Message: &quot;</span> <span class="o">+</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_bytes</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Message: &quot;</span> <span class="o">+</span> <span class="n">data</span><span class="p">)</span>
 
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">close_code</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">close_code</span><span class="p">):</span>
         <span class="k">pass</span>
 </pre></div>
 
@@ -687,14 +687,14 @@ has an attribute <code>encoding</code> which may optionally be set, in order to 
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="k">class</span> <span class="nc">Homepage</span><span class="p">(</span><span class="n">HTTPEndpoint</span><span class="p">):</span>
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Echo</span><span class="p">(</span><span class="n">WebSocketEndpoint</span><span class="p">):</span>
     <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span>
 
-    <span class="n">async</span> <span class="k">def</span> <span class="nf">on_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Message text was: {data}&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">websocket</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message text was: </span><span class="si">{data}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">Route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">Homepage</span><span class="p">),</span>
@@ -705,6 +705,7 @@ has an attribute <code>encoding</code> which may optionally be set, in order to 
 </pre></div>
                 
                   
+                
                 
               
               
@@ -772,7 +773,7 @@ has an attribute <code>encoding</code> which may optionally be set, in order to 
       
     </div>
     
-      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
