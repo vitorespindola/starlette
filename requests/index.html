@@ -764,6 +764,7 @@ Either item in the tuple may be <code>None</code>.</p>
 <h4 id="cookies">Cookies</h4>
 <p>Cookies are exposed as a regular dictionary interface.</p>
 <p>For example: <code>request.cookies.get('mycookie')</code></p>
+<p>Cookies are ignored in case of an invalid cookie. (RFC2109)</p>
 <h4 id="body">Body</h4>
 <p>There are a few different interfaces for returning the body of the request:</p>
 <p>The request body as bytes: <code>await request.body()</code></p>

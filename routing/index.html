@@ -658,8 +658,18 @@ views</a>.</li>
 </pre></div>
 
 
-<p>Convertors for <code>int</code>, <code>float</code>, and <code>path</code> are also available:</p>
+<p>By default this will capture characters up to the end of the path or the next <code>/</code>.</p>
+<p>You can use convertors to modify what is captured. Four convertors are available:</p>
+<ul>
+<li><code>str</code> returns a string, and is the default.</li>
+<li><code>int</code> returns a Python integer.</li>
+<li><code>float</code> returns a Python float.</li>
+<li><code>path</code> returns the rest of the path, including any additional <code>/</code> characers.</li>
+</ul>
+<p>Convertors are used by prefixing them with a colon, like so:</p>
 <div class="codehilite"><pre><span></span><span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/users/{user_id:int}&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+<span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/floating-point/{number:float}&#39;</span><span class="p">,</span> <span class="n">floating_point</span><span class="p">)</span>
+<span class="n">Route</span><span class="p">(</span><span class="s1">&#39;/uploaded/{rest_of_path:path}&#39;</span><span class="p">,</span> <span class="n">uploaded</span><span class="p">)</span>
 </pre></div>
 
 

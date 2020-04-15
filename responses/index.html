@@ -350,6 +350,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#third-party-middleware" class="md-nav__link">
+    Third party middleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sseresponseeventsourceresponse" class="md-nav__link">
+    SSEResponse(EventSourceResponse)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -671,6 +691,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#third-party-middleware" class="md-nav__link">
+    Third party middleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sseresponseeventsourceresponse" class="md-nav__link">
+    SSEResponse(EventSourceResponse)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -717,7 +757,7 @@ ASGI application instance.</p>
 
 <h4 id="set-cookie">Set Cookie</h4>
 <p>Starlette provides a <code>set_cookie</code> method to allow you to set cookies on the response object.</p>
-<p>Signature: <code>Response.set_cookie(key, value, max_age=None, expires=None, path="/", domain=None, secure=False, httponly=False)</code></p>
+<p>Signature: <code>Response.set_cookie(key, value, max_age=None, expires=None, path="/", domain=None, secure=False, httponly=False, samesite="lax")</code></p>
 <ul>
 <li><code>key</code> - A string that will be the cookie's key.</li>
 <li><code>value</code> - A string that will be the cookie's value.</li>
@@ -727,6 +767,7 @@ ASGI application instance.</p>
 <li><code>domain</code> - A string that specifies the domain for which the cookie is valid. <code>Optional</code></li>
 <li><code>secure</code> - A bool indicating that the cookie will only be sent to the server if request is made using SSL and the HTTPS protocol. <code>Optional</code></li>
 <li><code>httponly</code> - A bool indicating that the cookie cannot be accessed via Javascript through <code>Document.cookie</code> property, the <code>XMLHttpRequest</code> or <code>Request</code> APIs. <code>Optional</code></li>
+<li><code>samesite</code> - A string that specifies the samesite strategy for the cookie. Valid values are <code>'lax'</code>, <code>'strict'</code> and <code>'none'</code>. Defaults to <code>'lax'</code>. <code>Optional</code></li>
 </ul>
 <h4 id="delete-cookie">Delete Cookie</h4>
 <p>Conversly, Starlette also provides a <code>delete_cookie</code> method to manually expire a set cookie.</p>
@@ -839,6 +880,12 @@ you are micro-optimising a particular endpoint.</p>
     <span class="n">response</span> <span class="o">=</span> <span class="n">FileResponse</span><span class="p">(</span><span class="s1">&#39;statics/favicon.ico&#39;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </pre></div>
+
+
+<h2 id="third-party-middleware">Third party middleware</h2>
+<h3 id="sseresponseeventsourceresponse"><a href="https://github.com/sysid/sse-starlette">SSEResponse(EventSourceResponse)</a></h3>
+<p>Server Sent Response implements the ServerSentEvent Protocol: https://www.w3.org/TR/2009/WD-eventsource-20090421.<br />
+It enables event streaming from the server to the client without the complexity of websockets.</p>
                 
                   
                 
