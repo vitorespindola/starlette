@@ -30,6 +30,10 @@ def requires(
             if parameter.name == "request" or parameter.name == "websocket":
                 type = parameter.name
                 break
+            # TODO find a better way to identify?
+            elif parameter.name == "info":
+                type = "graphql"
+                break
         else:
             raise Exception(
                 f'No "request" or "websocket" argument on function "{func}"'
@@ -57,7 +61,14 @@ def requires(
             async def async_wrapper(
                 *args: typing.Any, **kwargs: typing.Any
             ) -> Response:
-                request = kwargs.get("request", args[idx] if args else None)
+                request = None
+                if type == "graphql":
+                    info = kwargs.get("info", args[idx] if args else None)
+                    if info:
+                        request = info.context.get("request")
+                else:
+                    request = kwargs.get("request", args[idx] if args else None)
+
                 assert isinstance(request, Request)
 
                 if not has_required_scope(request, scopes_list):
@@ -74,7 +85,13 @@ def requires(
             # Handle sync request/response functions.
             @functools.wraps(func)
             def sync_wrapper(*args: typing.Any, **kwargs: typing.Any) -> Response:
-                request = kwargs.get("request", args[idx] if args else None)
+                request = None
+                if type == "graphql":
+                    info = kwargs.get("info", args[idx] if args else None)
+                    if info:
+                        request = info.context.get("request")
+                else:
+                    request = kwargs.get("request", args[idx] if args else None)
                 assert isinstance(request, Request)
 
                 if not has_required_scope(request, scopes_list):
